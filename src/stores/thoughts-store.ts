@@ -9,5 +9,9 @@ export const useThoughtsStore = defineStore('thoughts', () => {
     thoughts.value.push(thought)
   }
 
-  return { thoughts, addThought }
+  function setThoughts(existingThoughts: ExistingThought[]) {
+    thoughts.value = (existingThoughts)
+  }
+
+  return { thoughts, addThought, setThoughts }
 })
