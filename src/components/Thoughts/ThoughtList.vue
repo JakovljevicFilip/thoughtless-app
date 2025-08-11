@@ -15,7 +15,9 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { listThoughts } from 'src/services/thoguhts-service'
 import { useThoughtsStore } from 'src/stores/thoughts-store'
+import { onMounted } from 'vue'
 
 const store = useThoughtsStore()
 const { thoughts } = storeToRefs(store)
@@ -26,6 +28,10 @@ function fontSizeClass(text: string) {
     if (len < 150) return 'text-subtitle1'
     return 'text-body2'
 }
+
+onMounted(() => {
+    listThoughts()
+})
 </script>
 
 <style scoped>
