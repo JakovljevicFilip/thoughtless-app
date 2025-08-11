@@ -1,5 +1,5 @@
-import type { NewThought } from "src/types/NewThought"
-import type { ExistingThought } from "src/types/ExistingThought"
+import type { NewThought } from 'src/types/NewThought'
+import type { ExistingThought } from 'src/types/ExistingThought'
 
 export type ThoughtCreateResponse = {
   id: string
@@ -21,13 +21,16 @@ export async function createThoughtRequest(payload: NewThought): Promise<Thought
   return res.json()
 }
 
+// src/api/thoughts-client.ts
 export async function listThoughtsRequest(): Promise<ThoughtListingResponse> {
-  const res = await fetch(`${API_BASE}/thoughts`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  })
+  const res = await fetch(`${API_BASE}/thoughts`)
   if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
-  
   const data = await res.json()
-  return data
+  return Array.isArray(data) ? data : data.data
+}
+
+
+export async function deleteThoughtRequest(id: string): Promise<void> {
+  const res = await fetch(`${API_BASE}/thoughts/${encodeURIComponent(id)}`, { method: 'DELETE' })
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
 }
