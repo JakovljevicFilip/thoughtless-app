@@ -1,0 +1,49 @@
+<template>
+    <div class="q-pa-md">
+        <transition-group appear tag="div" class="row items-start q-col-gutter-md q-gutter-y-md"
+            enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+            <div v-for="t in thoughts" :key="t.id" class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <q-card class="rounded-borders overflow-hidden fade-bottom" style="height: 180px">
+                    <q-card-section :class="['preserve-preline', fontSizeClass(t.content), 'q-pr-sm']">
+                        {{ t.content }}
+                    </q-card-section>
+                </q-card>
+            </div>
+        </transition-group>
+    </div>
+</template>
+
+<script setup lang="ts">
+import { storeToRefs } from 'pinia'
+import { useThoughtsStore } from 'src/stores/thoughts-store'
+
+const store = useThoughtsStore()
+const { thoughts } = storeToRefs(store)
+
+function fontSizeClass(text: string) {
+    const len = text.length
+    if (len < 50) return 'text-h4'
+    if (len < 150) return 'text-subtitle1'
+    return 'text-body2'
+}
+</script>
+
+<style scoped>
+.preserve-preline {
+    white-space: pre-line;
+}
+
+.fade-bottom {
+    position: relative;
+}
+
+.fade-bottom::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: inherit;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 60%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 60%, black 100%);
+}
+</style>
