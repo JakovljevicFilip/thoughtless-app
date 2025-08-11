@@ -41,18 +41,21 @@ function confirmDelete(id: string) {
         message: 'Are you sure?',
         cancel: true,
         ok: { label: 'Delete', color: 'negative' }
-    }).onOk(async () => {
-        try {
-            await deleteThought(id)
-            $q.notify({ type: 'positive', message: 'Deleted' })
-        } catch (e: any) {
-            $q.notify({ type: 'negative', message: e?.message ?? 'Delete failed' })
-        }
+    }).onOk(() => {
+        void (async () => {
+            try {
+                await deleteThought(id)
+                $q.notify({ type: 'positive', message: 'Deleted' })
+            } catch (e: unknown) {
+                const message = e instanceof Error ? e.message : 'Delete failed'
+                $q.notify({ type: 'negative', message })
+            }
+        })()
     })
 }
 
-onMounted(() => {
-    listThoughts()
+onMounted(async () => {
+    await listThoughts()
 })
 </script>
 
