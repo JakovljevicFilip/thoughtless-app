@@ -10,4 +10,4 @@ apt-get update && apt-get install -y acl
 setfacl -Rm u:${ACTUAL_UID}:rwx,d:u:${ACTUAL_UID}:rwx "$APP_PATH"
 
 echo "🚀 Starting Quasar dev server..."
-exec npx quasar dev -H 0.0.0.0 -p 9000
+exec npx quasar dev --hostname 0.0.0.0 --port 9000
