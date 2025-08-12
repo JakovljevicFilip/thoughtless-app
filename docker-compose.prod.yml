@@ -4,7 +4,7 @@ services:
   quasar:
     build:
       context: .
-      dockerfile: ./docker/quasar/Dockerfile
+      dockerfile: ./docker/Dockerfile
     networks:
       - thoughtless
       - traefik_proxy
