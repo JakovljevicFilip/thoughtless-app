@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    networks:
+      - thoughtless
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`grozdan.app`)"
+      - "traefik.http.routers.frontend.entrypoints=websecure"
+      - "traefik.http.routers.frontend.tls.certresolver=le"
+      - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.frontend-http.rule=Host(`grozdan.app`)"
+      - "traefik.http.routers.frontend-http.entrypoints=web"
+      - "traefik.http.routers.frontend-http.middlewares=redirect-https"
+
+networks:
+  thoughtless:
+    external: true
+  traefik_proxy:
+    external: true
