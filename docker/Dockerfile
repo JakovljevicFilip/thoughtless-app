@@ -3,10 +3,10 @@ FROM node:20 AS build
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
+# Copy the entire project so postinstall (quasar prepare) can run
 COPY . .
+
+RUN npm install
 
 # Build only if NODE_ENV=production
 ARG NODE_ENV=production
