@@ -4,7 +4,10 @@ services:
   quasar:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: docker/Dockerfile
+      target: prod
+      args:
+        NODE_ENV: production
     networks:
       - thoughtless
       - traefik_proxy

@@ -1,13 +1,26 @@
-FROM node:20
+# --- Stage 1: Build with Node ---
+FROM node:20 AS build
 
 WORKDIR /app
 
-# Copy entire project before install so postinstall works
-COPY . .
-
+COPY package*.json ./
 RUN npm install
 
-COPY docker/scripts/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+COPY . .
 
-CMD ["/entrypoint.sh"]
+# Build only if NODE_ENV=production
+ARG NODE_ENV=production
+RUN if [ "$NODE_ENV" = "production" ]; then npm run build; fi
+
+
+# --- Stage 2: Dev environment ---
+FROM node:20 AS dev
+WORKDIR /app
+COPY --from=build /app ./
+CMD ["npx", "quasar", "dev", "--hostname", "0.0.0.0", "--port", "9000"]
+
+
+# --- Stage 3: Prod environment ---
+FROM nginx:1.27-alpine AS prod
+COPY --from=build /app/dist/spa /usr/share/nginx/html
+EXPOSE 80
