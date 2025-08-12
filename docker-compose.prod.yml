@@ -14,11 +14,11 @@ services:
       - traefik_proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`grozdan.app`)"
+      - "traefik.http.routers.frontend.rule=Host(`thoughtless.grozdan.app`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
       - "traefik.http.routers.frontend.tls.certresolver=le"
       - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.frontend-http.rule=Host(`grozdan.app`)"
+      - "traefik.http.routers.frontend-http.rule=Host(`thoughtless.grozdan.app`)"
       - "traefik.http.routers.frontend-http.entrypoints=web"
       - "traefik.http.routers.frontend-http.middlewares=redirect-https"
 
