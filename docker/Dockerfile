@@ -19,13 +19,19 @@ RUN npx quasar build
 FROM nginx:1.27-alpine AS production
 COPY --from=build /app/dist/spa /usr/share/nginx/html
 
-# Vue Router fallback (so /thoughts works)
+# Vue Router fallback + static asset caching
 RUN printf 'server {\n\
-  listen 80;\n\
-  server_name _;\n\
-  root /usr/share/nginx/html;\n\
-  index index.html;\n\
-  location / {\n\
-    try_files $uri $uri/ /index.html;\n\
-  }\n\
+    listen 80;\n\
+    server_name _;\n\
+    root /usr/share/nginx/html;\n\
+    index index.html;\n\
+    location / {\n\
+        try_files $uri $uri/ /index.html;\n\
+    }\n\
+    # Static file caching\n\
+    location ~* \.(?:ico|css|js|gif|jpe?g|png|woff2?|eot|ttf|svg|mp4)$ {\n\
+        expires 6M;\n\
+        access_log off;\n\
+        add_header Cache-Control "public";\n\
+    }\n\
 }' > /etc/nginx/conf.d/default.conf
