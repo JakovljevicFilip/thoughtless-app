@@ -1,0 +1,27 @@
+services:
+  quasar:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - HOST_UID=${UID:-1000}
+    stdin_open: true
+    tty: true
+    networks:
+      - thoughtless
+      - traefik_proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.thoughtless.rule=Host(`thoughtless.grozdan.app`)"
+      - "traefik.http.routers.thoughtless.entrypoints=websecure"
+      - "traefik.http.routers.thoughtless.tls.certresolver=le"
+      - "traefik.http.services.thoughtless.loadbalancer.server.port=9000"
+
+networks:
+  thoughtless:
+    external: true
+  traefik_proxy:
+    external: true
