@@ -15,6 +15,7 @@ services:
       - traefik_proxy
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=traefik_proxy"
       - "traefik.http.routers.thoughtless.rule=Host(`thoughtless.grozdan.app`)"
       - "traefik.http.routers.thoughtless.entrypoints=websecure"
       - "traefik.http.routers.thoughtless.tls.certresolver=le"
