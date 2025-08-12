@@ -4,6 +4,7 @@
 import { defineConfig } from '#q-app/wrappers';
 import { fileURLToPath, URL } from 'node:url';
 import checker from 'vite-plugin-checker';
+import type { InlineConfig, ServerOptions } from 'vite';
 
 export default defineConfig((/* ctx */) => {
   return {
@@ -77,6 +78,11 @@ export default defineConfig((/* ctx */) => {
           { server: false },
         ],
       ],
+
+      extendViteConf(viteConf: InlineConfig) {
+        viteConf.server = (viteConf.server || {}) as ServerOptions;
+        viteConf.server.allowedHosts = ['thoughtless.grozdan.app', 'localhost'];
+      }
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#devserver
