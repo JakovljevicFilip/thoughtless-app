@@ -1,26 +1,31 @@
-# --- Stage 1: Build with Node ---
-FROM node:20 AS build
-
+# ---------- Base image for building ----------
+FROM node:20 AS base
 WORKDIR /app
+COPY package*.json ./
 
-# Copy the entire project so postinstall (quasar prepare) can run
-COPY . .
-
+# Install dependencies
 RUN npm install
 
-# Build only if NODE_ENV=production
-ARG NODE_ENV=production
-RUN if [ "$NODE_ENV" = "production" ]; then npm run build; fi
+# Copy rest of the app
+COPY . .
 
+# ---------- Development ----------
+FROM base AS development
+# Expose Quasar dev server port
+EXPOSE 9000
+CMD ["npm", "run", "dev"]
 
-# --- Stage 2: Dev environment ---
-FROM node:20 AS dev
-WORKDIR /app
-COPY --from=build /app ./
-CMD ["npx", "quasar", "dev", "--hostname", "0.0.0.0", "--port", "9000"]
+# ---------- Production Build ----------
+FROM base AS build
+RUN npm run build
 
-
-# --- Stage 3: Prod environment ---
-FROM nginx:1.27-alpine AS prod
+# ---------- Production Server (Nginx) ----------
+FROM nginx:1.27-alpine AS production
 COPY --from=build /app/dist/spa /usr/share/nginx/html
+
+# Nginx config for Vue Router SPA fallback
+RUN rm /etc/nginx/conf.d/default.conf
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+
 EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

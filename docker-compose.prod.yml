@@ -1,13 +1,9 @@
-version: "3.9"
-
 services:
   quasar:
     build:
       context: .
       dockerfile: docker/Dockerfile
-      target: prod
-      args:
-        NODE_ENV: production
+      target: production
     networks:
       - thoughtless
       - traefik_proxy
