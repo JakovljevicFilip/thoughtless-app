@@ -2,8 +2,7 @@ services:
   quasar:
     build:
       context: .
-      dockerfile: docker/Dockerfile
-    command: npx quasar dev --hostname 0.0.0.0 --port 9000
+      dockerfile: docker/Dockerfile.local
     ports:
       - "9000:9000"
     volumes:

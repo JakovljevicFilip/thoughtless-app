@@ -2,7 +2,7 @@ services:
   thoughtless-fe:
     build:
       context: .
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/Dockerfile.prod
       args:
         NODE_ENV: production
     environment:
