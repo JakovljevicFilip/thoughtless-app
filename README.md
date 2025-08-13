@@ -26,7 +26,7 @@ cp .env.example .env
 
 ```bash
 docker network inspect thoughtless >/dev/null 2>&1 || docker network create thoughtless
-docker compose up --build
+docker compose -f docker-compose.local.yml up --build
 ```
 
 ### 4. Access the Quasar container (optional)
