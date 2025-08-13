@@ -2,7 +2,7 @@ services:
   quasar:
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/Dockerfile.local
     ports:
       - "9000:9000"
     volumes:
