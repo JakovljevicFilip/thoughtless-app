@@ -7,5 +7,5 @@
 </template>
 
 <script setup lang="ts">
-import ThoughtInput from './ThoughtInput/ThoughtInput.vue';
+import ThoughtInput from 'src/components/Experimental/ThoughtInput/ThoughtInput.vue';
 </script>
