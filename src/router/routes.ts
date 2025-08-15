@@ -20,6 +20,28 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+  {
+    path: '/about-us',
+    component: () => import('layouts/ThoughtlessLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/Experimental/AboutUs.vue')
+      },
+    ],
+  },
+
+    {
+    path: '/home',
+    component: () => import('layouts/ThoughtlessLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/HomePage.vue')
+      },
+    ],
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
