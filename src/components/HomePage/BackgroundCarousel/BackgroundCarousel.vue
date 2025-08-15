@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import AboutSlide from 'src/components/Experimental/AboutUs/AboutSlide.vue'
+import AboutSlide from './AboutSlide.vue';
 
 interface Props {
     modelValue: string

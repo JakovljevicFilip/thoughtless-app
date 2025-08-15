@@ -12,7 +12,7 @@ import { useDraggableSheet } from 'src/composables/useDraggableSheet';
 
 const { peek, snapPoints } = defineProps<{ peek: number; snapPoints: number[] }>()
 const { topPx, sheetTransition, startDrag } = useDraggableSheet(peek, snapPoints, {
-  maxRatio: 0.85,        // tweak if needed
+  maxRatio: 0.85,
   durationMs: 220,
   easing: 'cubic-bezier(.2,.8,.2,1)'
 })

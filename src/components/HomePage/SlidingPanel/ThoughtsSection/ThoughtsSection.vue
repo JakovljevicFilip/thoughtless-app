@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import ThoughtInput from 'src/components/Experimental/ThoughtInput/ThoughtInput.vue'
-import ThoughtCards from 'src/components/Experimental/ThoughtCards/ThoughtCards.vue'
+import ThoughtCards from './ThoughtCards/ThoughtCards.vue';
+import ThoughtInput from './ThoughtInput/ThoughtInput.vue';
 </script>
 
 <style scoped>
