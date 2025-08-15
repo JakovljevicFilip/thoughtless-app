@@ -8,8 +8,8 @@
 
 <script setup lang="ts">
 import { useQuasar } from 'quasar'
+import ConfirmDialog from 'src/components/dialogs/ConfirmDialog.vue';
 import { deleteThought } from 'src/services/thoguhts-service'
-import ConfirmDialog from '../dialogs/ConfirmDialog.vue';
 
 const props = withDefaults(defineProps<{
     id: string,
