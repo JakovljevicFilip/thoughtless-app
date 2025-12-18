@@ -1,9 +1,9 @@
 services:
   quasar:
     build: .
-    container_name: platform_fe
+    container_name: thoughtless-app
     ports:
-      - "9001:9000"
+      - '9001:9000'
     volumes:
       - .:/app
       - /app/node_modules
