@@ -9,12 +9,8 @@ import { thoughtRebuildRule } from './Rules/thought-rebuild'
 export class ThoughtAggregate extends Aggregate<Thought> {
   static record(content: string, numberOfActiveThoughts: number): Thought {
     thoughtRules.canRecord(content, numberOfActiveThoughts)
-    // TODO: This is temporary, bring back original createdAt
-    const now = new Date()
-    // 7 days - 1 minute ago
-    const createdAt = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000 + 60 * 1000)
 
-    return new Thought(ThoughtId.generate(), content.trim(), createdAt, null, ThoughtStatus.ACTIVE)
+    return new Thought(ThoughtId.generate(), content.trim(), new Date(), null, ThoughtStatus.ACTIVE)
   }
 
   override rebuild(
