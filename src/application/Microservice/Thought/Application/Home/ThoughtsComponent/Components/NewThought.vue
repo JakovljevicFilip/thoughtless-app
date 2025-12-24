@@ -8,7 +8,7 @@
       color="grey-5"
       standout="bg-grey-4 text-black"
       hide-bottom-space
-      :rules="rules"
+      :rules="thoughtInput.content.rules"
       lazy-rules
     />
     <div class="row justify-end q-mt-sm">
@@ -25,20 +25,20 @@
 </template>
 
 <script setup lang="ts">
-  import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
+  import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
+
   import { thoughtService } from '../../../Service/thought-service'
+  import { thoughtInput } from './Input/thought-input'
 
   import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
 
   import { computed, ref } from 'vue'
-  import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
   const content = ref('')
 
-  const trimmedLength = computed(() => content.value.trim().length)
-  const canSubmit = computed(() => {
-    return trimmedLength.value >= min && trimmedLength.value <= max && !isSubmitting.value
-  })
+  const canSubmit = computed(
+    () => thoughtInput.content.isValid(content.value) && !isSubmitting.value
+  )
   const isSubmitting = ref(false)
 
   const record = async () => {
@@ -55,13 +55,4 @@
       isSubmitting.value = false
     }
   }
-  // TODO: Extract rule
-  const min = ThoughtSettings.minContentLength
-  const max = ThoughtSettings.maxContentLength
-
-  const rules = [
-    (val: string) => (!!val && val.trim().length > 0) || 'Thought content is required',
-    (val: string) => val.trim().length >= min || `Minimum ${min} characters`,
-    (val: string) => val.trim().length <= max || `Maximum ${max} characters`,
-  ]
 </script>
