@@ -1,6 +1,6 @@
 import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
 
-import type { InputFieldValidation } from 'src/application/Platform/InputValidation/Domain/InputValidation'
+import type { InputFieldValidation } from 'src/application/Platform/AggregateSchema/Application/Input/InputValidation'
 
 export const thoughtInput: {
   content: InputFieldValidation<string>

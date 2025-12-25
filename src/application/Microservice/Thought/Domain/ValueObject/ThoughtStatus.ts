@@ -1,4 +1,4 @@
-import { ThoughtError } from '../ThoughtError'
+import { ThoughtDomainError } from '../ThoughtDomainError'
 
 export class ThoughtStatus {
   private constructor(public readonly value: string) {}
@@ -13,7 +13,7 @@ export class ThoughtStatus {
       case 'discarded':
         return ThoughtStatus.DISCARDED
       default:
-        throw new ThoughtError(`Invalid TaskStatus: ${input}`)
+        throw new ThoughtDomainError(`Invalid TaskStatus: ${input}`)
     }
   }
 

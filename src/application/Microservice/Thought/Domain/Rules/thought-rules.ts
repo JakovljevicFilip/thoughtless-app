@@ -1,11 +1,11 @@
-import { ThoughtError } from '../ThoughtError'
+import { ThoughtDomainError } from '../ThoughtDomainError'
 import { ThoughtSettings } from '../ThoughtSettings'
 import { ThoughtStatus } from '../ValueObject/ThoughtStatus'
 
 export const thoughtRules = {
   validateContentNotEmpty(content: string): void {
     if (!content || content.trim().length === 0) {
-      throw new ThoughtError('Thought content cannot be empty.')
+      throw new ThoughtDomainError('Thought content cannot be empty.')
     }
   },
 
@@ -15,7 +15,7 @@ export const thoughtRules = {
     const max = ThoughtSettings.maxContentLength
 
     if (trimmed < min || trimmed > max) {
-      throw new ThoughtError(`Thought content must be between ${min} and ${max} characters.`)
+      throw new ThoughtDomainError(`Thought content must be between ${min} and ${max} characters.`)
     }
   },
 
@@ -24,17 +24,19 @@ export const thoughtRules = {
     this.validateContentLength(content)
 
     if (numberOfActiveThoughts >= ThoughtSettings.maxActive) {
-      throw new ThoughtError(`Cannot have more than ${ThoughtSettings.maxActive} active thoughts.`)
+      throw new ThoughtDomainError(
+        `Cannot have more than ${ThoughtSettings.maxActive} active thoughts.`
+      )
     }
   },
 
   canChange(currentStatus: ThoughtStatus, createdAt: Date, newContent: string): void {
     if (!currentStatus.equals(ThoughtStatus.ACTIVE)) {
-      throw new ThoughtError('Only active thoughts can be changed.')
+      throw new ThoughtDomainError('Only active thoughts can be changed.')
     }
 
     if (this.isExpired(createdAt)) {
-      throw new ThoughtError('Expired thoughts cannot be changed.')
+      throw new ThoughtDomainError('Expired thoughts cannot be changed.')
     }
 
     this.validateContentNotEmpty(newContent)
@@ -43,11 +45,11 @@ export const thoughtRules = {
 
   canDiscard(currentStatus: ThoughtStatus, numberOfDiscardedThoughts: number): void {
     if (!currentStatus.equals(ThoughtStatus.ACTIVE)) {
-      throw new ThoughtError('Only active thoughts can be discarded.')
+      throw new ThoughtDomainError('Only active thoughts can be discarded.')
     }
 
     if (numberOfDiscardedThoughts >= ThoughtSettings.maxDiscarded) {
-      throw new ThoughtError(
+      throw new ThoughtDomainError(
         `Cannot have more than ${ThoughtSettings.maxDiscarded} discarded thoughts.`
       )
     }
@@ -55,17 +57,19 @@ export const thoughtRules = {
 
   canRestore(currentStatus: ThoughtStatus, numberOfActiveThoughts: number): void {
     if (!currentStatus.equals(ThoughtStatus.DISCARDED)) {
-      throw new ThoughtError('Only discarded thoughts can be restored.')
+      throw new ThoughtDomainError('Only discarded thoughts can be restored.')
     }
 
     if (numberOfActiveThoughts >= ThoughtSettings.maxActive) {
-      throw new ThoughtError(`Cannot have more than ${ThoughtSettings.maxActive} active thoughts.`)
+      throw new ThoughtDomainError(
+        `Cannot have more than ${ThoughtSettings.maxActive} active thoughts.`
+      )
     }
   },
 
   canRemove(currentStatus: ThoughtStatus): void {
     if (!currentStatus.equals(ThoughtStatus.DISCARDED)) {
-      throw new ThoughtError('Only discarded thoughts can be removed.')
+      throw new ThoughtDomainError('Only discarded thoughts can be removed.')
     }
   },
 

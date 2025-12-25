@@ -13,6 +13,7 @@ import type { Thought } from '../../Domain/Thought'
 
 import { ThoughtSettings } from '../../Domain/ThoughtSettings'
 import { storeToRefs } from 'pinia'
+import { ThoughtApplicationError } from '../ThoughtApplicationError'
 
 export const thoughtService = {
   // COMMANDS
@@ -39,14 +40,16 @@ export const thoughtService = {
     const store = useThoughtStore()
     const { discarded } = storeToRefs(store)
 
-    // TODO: This could be replaced with a typed error.
     if (discarded.value.length < ThoughtSettings.maxDiscarded) {
-      throw new Error('There are no thoughts that need to be force discarded.')
+      throw new ThoughtApplicationError(
+        'discard',
+        'There are no thoughts that need to be force discarded.'
+      )
     }
 
     const oldestDiscarded = store.getOldestDiscarded()
     if (oldestDiscarded === null) {
-      throw new Error('Discarded thoughts are missing.')
+      throw new ThoughtApplicationError('discard', 'Discarded thoughts are missing.')
     }
 
     await this.remove(oldestDiscarded)
