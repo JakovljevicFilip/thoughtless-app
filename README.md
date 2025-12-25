@@ -1,6 +1,6 @@
 ## Thoughtless
 
-> From first spark to fully formed project – your entry point for capturing ideas on the fly.
+From first spark to fully formed project – your entry point for capturing ideas on the fly.
 
 ## Based on the Platform repository
 
