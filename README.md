@@ -1,43 +1,93 @@
-## platform-fe
+## Thoughtless
 
-![Quasar](https://img.shields.io/badge/Quasar-2-1976D2?logo=quasar&logoColor=white) ![Vue](https://img.shields.io/badge/Vue-3-42b883) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?logo=typescript&logoColor=white) ![Architecture](https://img.shields.io/badge/DDD-architecture-blueviolet) ![Offline‑first](https://img.shields.io/badge/Offline--first-enabled-brightgreen)
+From first spark to fully formed project – your entry point for capturing ideas on the fly.
 
-## Overview
+## Based on the Platform repository
 
-`platform-fe` is a reusable, offline-first frontend scaffold built with Quasar, Vue 3, and TypeScript, following strict Domain-Driven Design (DDD) principles.  
-It establishes a clear architectural baseline for microservice-oriented applications, enforcing consistent patterns, boundaries, and development workflows.
+This application is based on the shared Platform frontend repository: https://github.com/JakovljevicFilip/platform-fe
 
-This repository serves as the foundational platform for future applications built on top of the same architecture.
+## Product Overview
 
-## Setup
+Thoughtless is for people who come up with ideas, notes, and mental reminders but don’t have time to act on them right away.
 
-### 1. Prerequisites
+It makes it easy to capture ideas in the moment. Stay focused on what matters now and come back later when you have time to work on them.
 
-- Docker and Docker Compose
-- Node.js (see `engines` in [`package.json`](package.json))
-- npm or Yarn
+Thoughtless treats ideas as something to be explored, not stored forever. It encourages a simple, healthy cycle:
 
-### 2. Run via Docker
+- Capture an idea quickly, without friction.
+- Keep it active and visible for a limited time.
+- Review, refine, or discard it before it expires.
+- Let go of what no longer matters so the important ideas stand out.
 
-Build and start the application:
+The application supports this with clear limits and rules. It:
+
+- Controls how many active ideas you can have.
+- Controls how many discarded ideas you can keep.
+- Defines how long an idea stays relevant.
+- Signals when an idea is getting close to expiry.
+
+These guardrails help you:
+
+- Avoid endless lists and note-hoarding.
+- Stay focused on a small number of meaningful ideas.
+- Build a habit of regularly revisiting and curating what you keep.
+- Reduce the stress that comes from unstructured, ever‑growing lists.
+
+Thoughtless works like a simple personal assistant for your ideas. It keeps them safe, focused, and easy to manage.
+
+## Key Concepts
+
+- **Active thoughts** – Recently captured thoughts that stay visible only for a limited time. There is a cap on how many active thoughts can be kept at the same time.
+- **Discarded thoughts** – A holding place for removed active thoughts. A limited number are preserved so they can be restored if discarded by accident.
+
+## Getting started
+
+The following instructions are intended for developers who want to run or integrate Thoughtless.
+
+### Prerequisites
+
+- For Docker-based setup:
+  - Docker and Docker Compose
+- For local (non-Docker) setup:
+  - Node.js (see the `engines` field in `package.json`)
+  - npm or Yarn
+
+### Setup
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/JakovljevicFilip/thoughtless-app.git
+cd thoughtless-app
+```
+
+#### 2. Environment configuration
+
+Create a local environment file based on the example:
+
+```bash
+cp .env.example .env
+```
+
+Adjust any values in `.env` as needed for the target environment.
+
+#### 3. Docker setup
+
+From the project root, build and start the stack:
 
 ```bash
 docker compose up --build
 ```
 
-The container will:
+This starts the frontend container and exposes the application on port `9001` (default: `http://localhost:9001`).
 
-- Build using the project [`Dockerfile`](Dockerfile)
-- Run the `platform_fe` service from [`docker-compose.yml`](docker-compose.yml)
-- Expose the frontend at `http://localhost:9000`
-
-Stop the container with:
+To stop and remove the containers:
 
 ```bash
 docker compose down
 ```
 
-### 3. Run locally
+#### 4. Local setup
 
 Install dependencies:
 
@@ -55,54 +105,4 @@ npm run dev
 yarn dev
 ```
 
-This launches Quasar in dev mode with hot-reload enabled.
-
-## Architecture Documentation
-
-All architectural rules live inside the [`architecture/`](architecture) directory:
-
-- DDD principles: [`ddd.md`](architecture/ddd.md), [`domain.md`](architecture/domain.md)
-- Directory and file conventions: [`directories.md`](architecture/directories.md), [`files.md`](architecture/files.md)
-- Code style and import rules: [`code.md`](architecture/code.md)
-- Approved libraries: [`libraries.md`](architecture/libraries.md)
-- Architectural patterns (factories, adapters, interfaces): [`patterns.md`](architecture/patterns.md)
-- YAML specifications used for enforcing system-level rules (if present)
-
-This folder serves as the single source of truth for how domains, layers, files, and conventions must be applied.
-
-## Development
-
-Development conventions are encoded in configuration and architecture files.
-
-Key config files:
-
-- [`eslint.config.js`](eslint.config.js)
-- [`.prettierrc.json`](.prettierrc.json)
-- [`tsconfig.json`](tsconfig.json)
-- [`quasar.config.ts`](quasar.config.ts)
-
-Scripts:
-
-```bash
-npm run lint
-npm run format
-npm run build
-
-# or the Yarn equivalents
-yarn lint
-yarn format
-yarn build
-```
-
-Offline-first behavior is implemented through the Platform layer and Quasar features such as PWA support, caching, and storage adapters.
-
-## Summary
-
-`platform-fe` is the architectural baseline for future applications.  
-All new products built on this platform should:
-
-- Keep the Platform, Required, and Shared layers consistent
-- Place new business logic inside `src/application/Microservice`
-- Follow the architecture and DDD conventions defined in the [`architecture/`](architecture) folder
-
-By starting from this platform, every application immediately gains a strict, predictable, offline-focused architecture powered by Quasar and TypeScript.
+The development server runs in watch mode and reloads on file changes.
