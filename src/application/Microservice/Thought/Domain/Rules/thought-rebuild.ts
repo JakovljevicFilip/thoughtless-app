@@ -1,4 +1,4 @@
-import { ThoughtError } from '../ThoughtError'
+import { ThoughtDomainError } from '../ThoughtDomainError'
 
 type ThoughtRebuildRule = {
   canRebuild(props: {
@@ -24,7 +24,7 @@ export const thoughtRebuildRule: ThoughtRebuildRule = {
       !(discarded_at === null || discarded_at instanceof Date) ||
       typeof status !== 'string'
     ) {
-      throw new ThoughtError('Invalid Thought persistence shape.', props)
+      throw new ThoughtDomainError('Invalid Thought persistence shape.', props)
     }
   },
 }
