@@ -1,0 +1,9 @@
+{
+  "appId": "com.filipjakovljevic.thoughtless",
+  "appName": "Thoughtless",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
