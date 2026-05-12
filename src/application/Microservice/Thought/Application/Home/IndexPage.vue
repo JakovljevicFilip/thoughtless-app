@@ -1,5 +1,5 @@
 <template>
-  <div class="q-ma-xl row justify-center">
+  <div class="q-my-lg q-mx-sm row justify-center">
     <div id="wrapper" class="col q-mx-lg">
       <ThoughtsComponent />
     </div>
