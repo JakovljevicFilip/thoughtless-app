@@ -3,6 +3,7 @@
     <NoticeComponent />
     <q-toolbar>
       <q-toolbar-title>{{ PlatformConfig.applicationName }}</q-toolbar-title>
+      <span>{{ PlatformConfig.applicationVersion }}</span>
       <q-btn round flat icon="account_circle" :disable="true" />
     </q-toolbar>
   </q-header>
