@@ -57,7 +57,7 @@
     </q-card-section>
 
     <q-card-section class="q-pt-sm q-pb-sm">
-      <div style="white-space: pre-line">
+      <div class="thought-content">
         {{ thought.content }}
       </div>
     </q-card-section>
@@ -132,3 +132,11 @@
     await useDiscard(thought)
   }
 </script>
+
+<style>
+  .thought-content {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+</style>
