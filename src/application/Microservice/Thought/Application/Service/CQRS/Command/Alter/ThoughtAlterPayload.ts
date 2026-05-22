@@ -1,6 +1,6 @@
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
 
-export interface ThoughtChangePayload {
+export interface ThoughtAlterPayload {
   thought: Thought
-  changedContent: string
+  alteredContent: string
 }

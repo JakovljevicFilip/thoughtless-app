@@ -38,12 +38,12 @@ export class ThoughtAggregate extends Aggregate<Thought> {
     )
   }
 
-  static change(thought: Thought, newContent: string): Thought {
-    thoughtRules.canChange(thought.status, thought.created_at, newContent)
+  static alter(thought: Thought, alteredContent: string): Thought {
+    thoughtRules.canAlter(thought.status, thought.created_at, alteredContent)
 
     return new Thought(
       thought.id,
-      newContent.trim(),
+      alteredContent.trim(),
       thought.created_at,
       null,
       ThoughtStatus.ACTIVE

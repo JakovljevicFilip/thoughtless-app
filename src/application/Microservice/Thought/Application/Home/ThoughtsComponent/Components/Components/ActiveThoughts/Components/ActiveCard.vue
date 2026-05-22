@@ -57,19 +57,12 @@
     </q-card-section>
 
     <q-card-section class="q-pt-sm q-pb-sm">
-      <div class="thought-content">
+      <div class="thought-content" @click="$emit('alter')">
         {{ thought.content }}
       </div>
     </q-card-section>
 
     <q-card-actions align="right" class="q-mt-auto text-caption text-secondary">
-      <button-component
-        label="Change"
-        icon="edit"
-        @click="$emit('change')"
-        :border="false"
-        :disable="thought.expiryStatus === ActiveThoughtExpiryStatus.EXPIRED"
-      />
       <button-component
         label="Copy"
         icon="content_copy"
@@ -107,7 +100,7 @@
   import { computed } from 'vue'
 
   const { thought } = defineProps<{ thought: ActiveThought }>()
-  defineEmits<{ (e: 'change'): void }>()
+  defineEmits<{ (e: 'alter'): void }>()
   useThoughtExpiry()
 
   const borderColor = computed(() => {

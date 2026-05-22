@@ -30,17 +30,17 @@ export const thoughtRules = {
     }
   },
 
-  canChange(currentStatus: ThoughtStatus, createdAt: Date, newContent: string): void {
+  canAlter(currentStatus: ThoughtStatus, createdAt: Date, alteredContent: string): void {
     if (!currentStatus.equals(ThoughtStatus.ACTIVE)) {
-      throw new ThoughtDomainError('Only active thoughts can be changed.')
+      throw new ThoughtDomainError('Only active thoughts can be altered.')
     }
 
     if (this.isExpired(createdAt)) {
-      throw new ThoughtDomainError('Expired thoughts cannot be changed.')
+      throw new ThoughtDomainError('Expired thoughts cannot be altered.')
     }
 
-    this.validateContentNotEmpty(newContent)
-    this.validateContentLength(newContent)
+    this.validateContentNotEmpty(alteredContent)
+    this.validateContentLength(alteredContent)
   },
 
   canDiscard(currentStatus: ThoughtStatus, numberOfDiscardedThoughts: number): void {

@@ -1,6 +1,6 @@
 import { useThoughtStore } from '../thought-store'
 
-import { thoughtChangeHandler } from './CQRS/Command/Change/change-handler'
+import { thoughtAlterHandler } from './CQRS/Command/Alter/alter-handler'
 import { thoughtDiscardHandler } from './CQRS/Command/Discard/discard-handler'
 import { thoughtRecordHandler } from './CQRS/Command/Record/record-handler'
 import { thoughtRemoveHandler } from './CQRS/Command/Remove/remove-handler'
@@ -23,8 +23,8 @@ export const thoughtService = {
     await this.listActive()
   },
 
-  async change(thought: Thought, changedContent: string): Promise<void> {
-    await thoughtChangeHandler.change(thought, changedContent)
+  async alter(thought: Thought, alteredContent: string): Promise<void> {
+    await thoughtAlterHandler.alter(thought, alteredContent)
     await this.listActive()
   },
 
