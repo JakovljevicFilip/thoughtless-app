@@ -1,18 +1,18 @@
 <template>
   <ThoughtsWrapper v-if="active.length > 0" :items="active">
     <template #default="{ item }">
-      <ActiveCard :thought="item" @change="change(item)" />
+      <ActiveCard :thought="item" @alter="alter(item)" />
     </template>
   </ThoughtsWrapper>
   <EmptyActiveSection v-else />
-  <ChangeDialog v-model="showChangeDialog" :thought="changing" />
+  <AlterDialog v-model="showAlterDialog" :thought="altering" />
 </template>
 
 <script setup lang="ts">
   import ThoughtsWrapper from '../ThoughtsWrapper.vue'
   import ActiveCard from './Components/ActiveCard.vue'
   import EmptyActiveSection from './Components/EmptyActiveSection.vue'
-  import ChangeDialog from './Components/ChangeDialog.vue'
+  import AlterDialog from './Components/AlterDialog.vue'
 
   import { type ActiveThought } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
 
@@ -26,12 +26,12 @@
   const store = useThoughtStore()
   const { active } = storeToRefs(store)
 
-  const changing = ref<ActiveThought | null>(null)
-  const showChangeDialog = ref(false)
+  const altering = ref<ActiveThought | null>(null)
+  const showAlterDialog = ref(false)
 
-  const change = (thought: ActiveThought) => {
-    changing.value = thought
-    showChangeDialog.value = true
+  const alter = (thought: ActiveThought) => {
+    altering.value = thought
+    showAlterDialog.value = true
   }
 
   useExpiryNotices(() => active.value)

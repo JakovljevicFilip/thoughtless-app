@@ -1,8 +1,8 @@
 <template>
-  <q-dialog v-model="showChangeDialog" persistent @before-show="beforeShow">
+  <q-dialog v-model="showAlterDialog" persistent @before-show="beforeShow">
     <q-card class="q-pa-lg" style="width: 480px; max-width: 90vw">
       <q-card-section class="q-pa-none">
-        <div class="text-h6">Change thought</div>
+        <div class="text-h6">Alter thought</div>
       </q-card-section>
 
       <q-card-section class="q-pa-none q-mt-md">
@@ -13,7 +13,7 @@
           bg-color="grey-2"
           :rows="20"
           input-style="resize: none"
-          placeholder="Change thought"
+          placeholder="Alter thought"
           :rules="thoughtInput.content.rules"
           lazy-rules
         />
@@ -22,8 +22,8 @@
       <q-card-actions align="right">
         <button-component label="Cancel" @click="cancel" size="md" />
         <button-component
-          label="Change"
-          @click="change"
+          label="Alter"
+          @click="alter"
           size="md"
           case="positive"
           :disable="!canSubmit"
@@ -48,7 +48,7 @@
     thought: ActiveThought | null
   }>()
 
-  const showChangeDialog = defineModel<boolean | null>({ default: null })
+  const showAlterDialog = defineModel<boolean | null>({ default: null })
 
   const content = ref('')
   const isSubmitting = ref(false)
@@ -57,17 +57,17 @@
     () => thoughtInput.content.isValid(content.value) && !isSubmitting.value
   )
 
-  async function change(): Promise<void> {
+  async function alter(): Promise<void> {
     if (!thought || !canSubmit.value) return
 
     try {
       isSubmitting.value = true
-      await thoughtService.change(thought, content.value)
+      await thoughtService.alter(thought, content.value)
       content.value = ''
       cancel()
-      notify.success('Thought changed successfully.')
+      notify.success('Thought altered successfully.')
     } catch {
-      notify.warning('Thought change failed. Please try again.')
+      notify.warning('Thought alteration failed. Please try again.')
     } finally {
       isSubmitting.value = false
     }
@@ -78,6 +78,6 @@
   }
 
   function cancel() {
-    showChangeDialog.value = false
+    showAlterDialog.value = false
   }
 </script>

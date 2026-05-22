@@ -1,5 +1,5 @@
-import type { ThoughtChangePayload } from './ThoughtChangePayload'
-import { thoughtChangeCommand } from './change-command'
+import type { ThoughtAlterPayload } from './ThoughtAlterPayload'
+import { thoughtAlterCommand } from './alter-command'
 
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
 
@@ -8,7 +8,7 @@ import type { LogAdapter } from 'src/application/Platform/Log/Domain/Log'
 
 import type { Command } from 'src/application/Platform/Service/Domain/CQRS/Command/Command'
 
-class ChangeHandler {
+class AlterHandler {
   private readonly log: LogAdapter
   private readonly command: Command
 
@@ -17,16 +17,16 @@ class ChangeHandler {
     this.command = command
   }
 
-  async change(thought: Thought, changedContent: string): Promise<void> {
+  async alter(thought: Thought, alteredContent: string): Promise<void> {
     try {
-      const payload = <ThoughtChangePayload>{
+      const payload = <ThoughtAlterPayload>{
         thought: thought,
-        changedContent: changedContent,
+        alteredContent: alteredContent,
       }
       await this.command.command(payload)
     } catch (error) {
       this.log.write({
-        context: 'Thought.change',
+        context: 'Thought.alter',
         thought,
         error,
       })
@@ -35,4 +35,4 @@ class ChangeHandler {
   }
 }
 
-export const thoughtChangeHandler = new ChangeHandler(logger, thoughtChangeCommand)
+export const thoughtAlterHandler = new AlterHandler(logger, thoughtAlterCommand)
