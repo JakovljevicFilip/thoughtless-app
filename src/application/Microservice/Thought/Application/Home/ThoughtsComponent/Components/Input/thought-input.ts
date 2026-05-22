@@ -7,7 +7,7 @@ export const thoughtInput: {
 } = {
   content: {
     rules: [
-      (v: string) => (!!v && v.trim().length > 0) || 'Thought content is required',
+      (v: string) => (!!v && v.trim().length > 0) || 'Content is required',
       (v: string) =>
         v.trim().length >= ThoughtSettings.minContentLength ||
         `Minimum ${ThoughtSettings.minContentLength} characters`,
