@@ -1,4 +1,3 @@
-import type { ThoughtRestorePayload } from './ThoughtRestorePayload'
 import { thoughtRestoreCommand } from './restore-command'
 
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
@@ -18,7 +17,7 @@ class ThoughtRestoreHandler {
 
   async restore(thought: Thought, numberOfActiveThoughts: number): Promise<void> {
     try {
-      const payload = <ThoughtRestorePayload>{
+      const payload = {
         thought: thought,
         numberOfActiveThoughts: numberOfActiveThoughts,
       }

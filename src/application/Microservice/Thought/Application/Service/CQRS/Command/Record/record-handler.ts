@@ -1,4 +1,3 @@
-import type { ThoughtRecordPayload } from './ThoughtRecordPayload'
 import { thoughtRecordCommand } from './record-command'
 
 import { logger } from 'src/application/Platform/Log/Application/log-service'
@@ -16,7 +15,7 @@ class ThoughtRecordHandler {
 
   async record(content: string, numberOfActiveThoughts: number): Promise<void> {
     try {
-      const payload = <ThoughtRecordPayload>{
+      const payload = {
         content: content,
         numberOfActiveThoughts: numberOfActiveThoughts,
       }

@@ -1,4 +1,3 @@
-import type { ThoughtDiscardPayload } from './ThoughtDiscardPayload'
 import { thoughtDiscardCommand } from './discard-command'
 
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
@@ -18,7 +17,7 @@ class ThoughtDiscardHandler {
 
   async discard(thought: Thought, numberOfDiscardedThoughts: number): Promise<void> {
     try {
-      const payload = <ThoughtDiscardPayload>{
+      const payload = {
         thought: thought,
         numberOfDiscardedThoughts: numberOfDiscardedThoughts,
       }

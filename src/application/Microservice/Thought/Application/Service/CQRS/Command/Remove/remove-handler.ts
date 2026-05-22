@@ -1,4 +1,3 @@
-import type { ThoughtRemovePayload } from './ThoughtRemovePayload'
 import { thoughtRemoveCommand } from './remove-command'
 
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
@@ -18,7 +17,7 @@ class ThoughtRemoveHandler {
 
   async remove(thought: Thought): Promise<void> {
     try {
-      const payload = <ThoughtRemovePayload>{
+      const payload = {
         thought: thought,
       }
       await this.command.command(payload)
