@@ -1,4 +1,3 @@
-import type { ThoughtAlterPayload } from './ThoughtAlterPayload'
 import { thoughtAlterCommand } from './alter-command'
 
 import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
@@ -19,7 +18,7 @@ class AlterHandler {
 
   async alter(thought: Thought, alteredContent: string): Promise<void> {
     try {
-      const payload = <ThoughtAlterPayload>{
+      const payload = {
         thought: thought,
         alteredContent: alteredContent,
       }
