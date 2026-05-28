@@ -87,7 +87,19 @@ To stop and remove the containers:
 docker compose down
 ```
 
-#### 4. Local setup
+Remove containers:
+
+```bash
+docker compose down -v
+```
+
+If you also ran the Android APK process, clean up that separate compose stack too:
+
+```bash
+docker compose -f docker-compose.android.yml down -v
+```
+
+### 3. Run locally
 
 Install dependencies:
 
