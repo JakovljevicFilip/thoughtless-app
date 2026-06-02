@@ -1,5 +1,6 @@
-import { getExpiryStatusFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
 import { useThoughtStore } from 'src/application/Microservice/Thought/Application/thought-store'
+
+import { getExpiryStatusFromExpiresAt } from 'src/application/Microservice/Thought/Domain/Rules/thoughtExpiry-rules'
 
 import { onMounted, onUnmounted } from 'vue'
 

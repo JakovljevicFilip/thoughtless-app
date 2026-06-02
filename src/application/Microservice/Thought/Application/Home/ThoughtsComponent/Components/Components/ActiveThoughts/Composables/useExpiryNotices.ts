@@ -1,5 +1,6 @@
 import type { ActiveThought } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
-import { ActiveThoughtExpiryStatus } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
+
+import { ThoughtExpiryStatus } from 'src/application/Microservice/Thought/Domain/ValueObject/ThoughtExpiryStatus'
 
 import { notice } from 'src/application/Platform/Notice/Application/notice-service'
 import { Notice, Style } from 'src/application/Platform/Notice/Domain/Notice'
@@ -16,7 +17,7 @@ export const useExpiryNotices = (thoughts: () => ActiveThought[]) => {
 }
 
 const handleExpired = (thoughts: ActiveThought[]): void => {
-  const expired = thoughts.filter(t => t.expiryStatus === ActiveThoughtExpiryStatus.EXPIRED)
+  const expired = thoughts.filter(t => t.expiryStatus === ThoughtExpiryStatus.EXPIRED)
 
   if (expired.length === 0) {
     notice.clearDomainScenario('Thought', 'expired')
@@ -35,10 +36,7 @@ const handleExpired = (thoughts: ActiveThought[]): void => {
 }
 
 const handleAboutToExpire = (thoughts: ActiveThought[]): void => {
-  const aboutToExpire = thoughts.filter(
-    t => t.expiryStatus === ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE
-  )
-
+  const aboutToExpire = thoughts.filter(t => t.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE)
   if (aboutToExpire.length === 0) {
     notice.clearDomainScenario('Thought', 'about_to_expire')
     return

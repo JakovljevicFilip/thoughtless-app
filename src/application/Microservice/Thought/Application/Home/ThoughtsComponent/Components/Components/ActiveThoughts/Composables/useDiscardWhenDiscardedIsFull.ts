@@ -5,9 +5,9 @@ import { thoughtService } from 'src/application/Microservice/Thought/Application
 import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
 
 
-export const useForceDiscard = async (thought: ActiveThought) => {
+export const useDiscardWhenDiscardedIsFull = async (thought: ActiveThought) => {
   try {
-    await thoughtService.forceDiscard(thought)
+    await thoughtService.discardWhenDiscardedIsFull(thought)
     notify.success('Thought discarded.')
   } catch {
     notify.warning('Thought could not be discarded.')
