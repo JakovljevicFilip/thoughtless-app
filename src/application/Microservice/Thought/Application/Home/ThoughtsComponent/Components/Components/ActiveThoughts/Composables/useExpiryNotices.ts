@@ -1,7 +1,7 @@
 import type { ActiveThought } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
-import { getExpiryStatusFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
 
 import { ThoughtExpiryStatus } from 'src/application/Microservice/Thought/Domain/ValueObject/ThoughtExpiryStatus'
+import { getExpiryStatusFromExpiresAt } from 'src/application/Microservice/Thought/Domain/Rules/thoughtExpiry-rules'
 
 import { notice } from 'src/application/Platform/Notice/Application/notice-service'
 import { Notice, Style } from 'src/application/Platform/Notice/Domain/Notice'

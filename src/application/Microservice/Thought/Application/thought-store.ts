@@ -1,6 +1,6 @@
-import { getExpiresAt } from './Helper/thoughtExpiry-helper'
 import type { ActiveThought } from './Types/ActiveThought'
 
+import { getExpiresAt } from '../Domain/Rules/thoughtExpiry-rules'
 import type { Thought } from '../Domain/Thought'
 import type { ThoughtId } from '../Domain/ValueObject/ThoughtId'
 import { ThoughtExpiryStatus } from '../Domain/ValueObject/ThoughtExpiryStatus'
