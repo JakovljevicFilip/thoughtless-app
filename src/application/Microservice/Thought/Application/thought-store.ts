@@ -1,9 +1,8 @@
 import type { ActiveThought } from './Types/ActiveThought'
 
-import { getExpiresAt } from '../Domain/Rules/thoughtExpiry-rules'
 import type { Thought } from '../Domain/Thought'
 import type { ThoughtId } from '../Domain/ValueObject/ThoughtId'
-import { ThoughtExpiryStatus } from '../Domain/ValueObject/ThoughtExpiryStatus'
+import { type ThoughtExpiryStatus } from '../Domain/ValueObject/ThoughtExpiryStatus'
 
 import { defineStore } from 'pinia'
 
@@ -14,12 +13,8 @@ export const useThoughtStore = defineStore('TaskStore', {
   }),
 
   actions: {
-    setActiveThoughts(thoughts: Thought[]) {
-      this.active = thoughts.map(t => ({
-        ...t,
-        expiresAt: getExpiresAt(t.created_at),
-        expiryStatus: ThoughtExpiryStatus.IDLE,
-      }))
+    setActiveThoughts(thoughts: ActiveThought[]) {
+      this.active = thoughts
     },
 
     setDiscardedThoughts(discarded: Thought[]) {

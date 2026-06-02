@@ -1,4 +1,6 @@
 import { useThoughtStore } from '../thought-store'
+import { ThoughtApplicationError } from '../ThoughtApplicationError'
+import { makeActiveThoughts } from './activeThoughts-helper'
 
 import { thoughtAlterHandler } from './CQRS/Command/Alter/alter-handler'
 import { thoughtDiscardHandler } from './CQRS/Command/Discard/discard-handler'
@@ -13,7 +15,6 @@ import type { Thought } from '../../Domain/Thought'
 
 import { ThoughtSettings } from '../../Domain/ThoughtSettings'
 import { storeToRefs } from 'pinia'
-import { ThoughtApplicationError } from '../ThoughtApplicationError'
 
 export const thoughtService = {
   // COMMANDS
@@ -76,7 +77,7 @@ export const thoughtService = {
   async listActive(): Promise<void> {
     const active = await thoughtListActiveHandler.listActive()
     const store = useThoughtStore()
-    store.setActiveThoughts(active)
+    store.setActiveThoughts(makeActiveThoughts(active))
   },
 
   async listDiscarded(): Promise<void> {
