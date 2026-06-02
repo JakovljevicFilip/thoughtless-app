@@ -36,7 +36,7 @@ export const thoughtService = {
     await this.listDiscarded()
   },
 
-  async forceDiscard(thought: Thought): Promise<void> {
+  async discardWhenDiscardedIsFull(thought: Thought): Promise<void> {
     const store = useThoughtStore()
     const { discarded } = storeToRefs(store)
 

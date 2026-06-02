@@ -91,7 +91,7 @@
   import { useThoughtExpiry } from '../Composables/useThoughtExpiry'
   import { useCopy } from '../../Composables/useCopy'
   import { useDiscard } from '../Composables/useDiscard'
-  import { useForceDiscard } from '../Composables/useForceDiscard'
+  import { useDiscardWhenDiscardedIsFull } from '../Composables/useDiscardWhenDiscardedIsFull'
 
   import { useThoughtStore } from 'src/application/Microservice/Thought/Application/thought-store'
   import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
@@ -119,7 +119,7 @@
 
   const handleDiscard = async (thought: ActiveThought) => {
     if (discarded.value.length >= ThoughtSettings.maxDiscarded) {
-      await useForceDiscard(thought)
+      await useDiscardWhenDiscardedIsFull(thought)
       return
     }
     await useDiscard(thought)
