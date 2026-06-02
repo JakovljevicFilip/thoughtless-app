@@ -7,7 +7,7 @@
   >
     <q-card-section class="row items-center no-wrap q-pb-none">
       <q-badge
-        v-if="thought.expiryStatus === ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE"
+        v-if="thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE"
         color="primary"
         text-color="white"
         rounded
@@ -18,7 +18,7 @@
       </q-badge>
 
       <q-badge
-        v-else-if="thought.expiryStatus === ActiveThoughtExpiryStatus.EXPIRED"
+        v-else-if="thought.expiryStatus === ThoughtExpiryStatus.EXPIRED"
         color="warning"
         text-color="white"
         rounded
@@ -33,9 +33,9 @@
       <div
         class="text-caption"
         :class="
-          thought.expiryStatus === ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE
+          thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
             ? 'text-primary'
-            : thought.expiryStatus === ActiveThoughtExpiryStatus.EXPIRED
+            : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
               ? 'text-warning'
               : 'text-secondary'
         "
@@ -45,9 +45,9 @@
           size="14px"
           class="q-mr-xs"
           :color="
-            thought.expiryStatus === ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE
+            thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
               ? 'primary'
-              : thought.expiryStatus === ActiveThoughtExpiryStatus.EXPIRED
+              : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
                 ? 'warning'
                 : 'secondary'
           "
@@ -84,7 +84,6 @@
   import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
   import type { ActiveThought } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
-  import { ActiveThoughtExpiryStatus } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
 
   import { getTimeRemainingFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
 
@@ -96,6 +95,8 @@
   import { useThoughtStore } from 'src/application/Microservice/Thought/Application/thought-store'
   import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
 
+  import { ThoughtExpiryStatus } from 'src/application/Microservice/Thought/Domain/ValueObject/ThoughtExpiryStatus'
+
   import { storeToRefs } from 'pinia'
   import { computed } from 'vue'
 
@@ -105,9 +106,9 @@
 
   const borderColor = computed(() => {
     switch (thought.expiryStatus) {
-      case ActiveThoughtExpiryStatus.EXPIRED:
+      case ThoughtExpiryStatus.EXPIRED:
         return 'var(--q-warning)'
-      case ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE:
+      case ThoughtExpiryStatus.ABOUT_TO_EXPIRE:
         return 'var(--q-primary)'
       default:
         return 'var(--q-secondary)'

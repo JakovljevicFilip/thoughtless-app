@@ -1,6 +1,5 @@
-import { ActiveThoughtExpiryStatus } from '../Types/ActiveThought'
-
 import { ThoughtSettings } from '../../Domain/ThoughtSettings'
+import { ThoughtExpiryStatus } from '../../Domain/ValueObject/ThoughtExpiryStatus'
 
 const MS_PER_MINUTE = 60_000
 const MS_PER_HOUR = 60 * MS_PER_MINUTE
@@ -15,20 +14,20 @@ export const getExpiresAt = (createdAt: Date): Date => {
 export const getExpiryStatusFromExpiresAt = (
   expiresAt: Date,
   now = Date.now()
-): ActiveThoughtExpiryStatus => {
+): ThoughtExpiryStatus => {
   const remainingMs = expiresAt.getTime() - now
 
   if (remainingMs <= 0) {
-    return ActiveThoughtExpiryStatus.EXPIRED
+    return ThoughtExpiryStatus.EXPIRED
   }
 
   const remainingDays = remainingMs / MS_PER_DAY
 
   if (remainingDays <= ThoughtSettings.warningIntervalDays || remainingMs < MS_PER_MINUTE) {
-    return ActiveThoughtExpiryStatus.ABOUT_TO_EXPIRE
+    return ThoughtExpiryStatus.ABOUT_TO_EXPIRE
   }
 
-  return ActiveThoughtExpiryStatus.IDLE
+  return ThoughtExpiryStatus.IDLE
 }
 
 export const getTimeRemainingFromExpiresAt = (expiresAt: Date, now = Date.now()): string => {
