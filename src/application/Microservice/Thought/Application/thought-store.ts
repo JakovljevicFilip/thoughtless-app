@@ -1,8 +1,6 @@
 import type { ActiveThought } from './Types/ActiveThought'
 
 import type { Thought } from '../Domain/Thought'
-import type { ThoughtId } from '../Domain/ValueObject/ThoughtId'
-import { type ThoughtExpiryStatus } from '../Domain/ValueObject/ThoughtExpiryStatus'
 
 import { defineStore } from 'pinia'
 
@@ -28,13 +26,6 @@ export const useThoughtStore = defineStore('TaskStore', {
       return this.discarded.reduce((oldest, current) => {
         return new Date(current.discarded_at!) < new Date(oldest.discarded_at!) ? current : oldest
       })
-    },
-
-    setActiveStatus(thoughtId: ThoughtId, status: ThoughtExpiryStatus) {
-      const thought = this.active.find(t => t.id.equals(thoughtId))
-      if (!thought) return
-
-      thought.expiryStatus = status
     },
   },
 })
