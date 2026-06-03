@@ -1,6 +1,8 @@
+import { makeActiveThoughts } from './activeThoughts-helper'
+import { syncQuotaNotice } from './quotaNotice-helper'
+
 import { useThoughtStore } from '../thought-store'
 import { ThoughtApplicationError } from '../ThoughtApplicationError'
-import { makeActiveThoughts } from './activeThoughts-helper'
 
 import { thoughtAlterHandler } from './CQRS/Command/Alter/alter-handler'
 import { thoughtDiscardHandler } from './CQRS/Command/Discard/discard-handler'
@@ -78,6 +80,7 @@ export const thoughtService = {
     const active = await thoughtListActiveHandler.listActive()
     const store = useThoughtStore()
     store.setActiveThoughts(makeActiveThoughts(active))
+    syncQuotaNotice(active.length)
   },
 
   async listDiscarded(): Promise<void> {
