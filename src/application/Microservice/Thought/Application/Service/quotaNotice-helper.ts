@@ -3,7 +3,7 @@ import { thoughtRules } from '../../Domain/Rules/thought-rules'
 import { notice } from 'src/application/Platform/Notice/Application/notice-service'
 import { Notice, Style } from 'src/application/Platform/Notice/Domain/Notice'
 
-export const syncQuotaNotice = (numberOfActiveThoughts: number): void => {
+export const syncActiveQuotaNotice = (numberOfActiveThoughts: number): void => {
   const domainName = 'Thought'
   const scenario = 'active_quota_full'
 

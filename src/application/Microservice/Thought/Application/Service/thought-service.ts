@@ -1,5 +1,5 @@
 import { makeActiveThoughts } from './activeThoughts-helper'
-import { syncQuotaNotice } from './quotaNotice-helper'
+import { syncActiveQuotaNotice } from './quotaNotice-helper'
 
 import { useThoughtStore } from '../thought-store'
 import { ThoughtApplicationError } from '../ThoughtApplicationError'
@@ -22,6 +22,7 @@ export const thoughtService = {
   // COMMANDS
   async record(content: string): Promise<void> {
     const store = useThoughtStore()
+
     await thoughtRecordHandler.record(content, store.active.length)
     await this.listActive()
   },
@@ -80,7 +81,7 @@ export const thoughtService = {
     const active = await thoughtListActiveHandler.listActive()
     const store = useThoughtStore()
     store.setActiveThoughts(makeActiveThoughts(active))
-    syncQuotaNotice(active.length)
+    syncActiveQuotaNotice(active.length)
   },
 
   async listDiscarded(): Promise<void> {
