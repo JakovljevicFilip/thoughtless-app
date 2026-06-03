@@ -30,6 +30,10 @@ export const thoughtRules = {
     }
   },
 
+  isActiveQuotaFull(numberOfActiveThoughts: number): boolean {
+    return numberOfActiveThoughts >= ThoughtSettings.maxActive
+  },
+
   canAlter(currentStatus: ThoughtStatus, createdAt: Date, alteredContent: string): void {
     if (!currentStatus.equals(ThoughtStatus.ACTIVE)) {
       throw new ThoughtDomainError('Only active thoughts can be altered.')

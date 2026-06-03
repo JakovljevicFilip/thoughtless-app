@@ -1,6 +1,8 @@
+import { makeActiveThoughts } from './activeThoughts-helper'
+import { syncActiveQuotaNotice } from './quotaNotice-helper'
+
 import { useThoughtStore } from '../thought-store'
 import { ThoughtApplicationError } from '../ThoughtApplicationError'
-import { makeActiveThoughts } from './activeThoughts-helper'
 
 import { thoughtAlterHandler } from './CQRS/Command/Alter/alter-handler'
 import { thoughtDiscardHandler } from './CQRS/Command/Discard/discard-handler'
@@ -20,6 +22,7 @@ export const thoughtService = {
   // COMMANDS
   async record(content: string): Promise<void> {
     const store = useThoughtStore()
+
     await thoughtRecordHandler.record(content, store.active.length)
     await this.listActive()
   },
@@ -78,6 +81,7 @@ export const thoughtService = {
     const active = await thoughtListActiveHandler.listActive()
     const store = useThoughtStore()
     store.setActiveThoughts(makeActiveThoughts(active))
+    syncActiveQuotaNotice(active.length)
   },
 
   async listDiscarded(): Promise<void> {

@@ -25,19 +25,29 @@
 </template>
 
 <script setup lang="ts">
+  import { isActiveQuotaFull } from './isActiveQuotaFull-helper'
+
   import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
+  import { ThoughtApplicationError } from '../../../ThoughtApplicationError'
   import { thoughtService } from '../../../Service/thought-service'
+  import { useThoughtStore } from '../../../thought-store'
   import { thoughtInput } from './Input/thought-input'
 
   import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
 
   import { computed, ref } from 'vue'
+  import { storeToRefs } from 'pinia'
 
   const content = ref('')
+  const store = useThoughtStore()
+  const { active } = storeToRefs(store)
 
   const canSubmit = computed(
-    () => thoughtInput.content.isValid(content.value) && !isSubmitting.value
+    () =>
+      thoughtInput.content.isValid(content.value) &&
+      !isSubmitting.value &&
+      !isActiveQuotaFull(active.value.length)
   )
   const isSubmitting = ref(false)
 
@@ -49,7 +59,8 @@
       await thoughtService.record(content.value)
       content.value = ''
       notify.success('Thought recorded.')
-    } catch {
+    } catch (error) {
+      if (error instanceof ThoughtApplicationError) return
       notify.warning('Thought record failed. Please try again.')
     } finally {
       isSubmitting.value = false
