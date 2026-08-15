@@ -12,9 +12,9 @@
 import type { Runner } from '../Domain/Runner'
 import { RunnerError } from '../Domain/RunnerError'
 
-import { platformRunner } from '../../Application/platform-runner'
+import { platformRunner } from '../../../Application/platform-runner'
 import { microserviceRunner } from 'src/application/Required/Application/microservice-runner'
-import { logger } from '../../Log/Application/log-service'
+import { logger } from '../../../Log/Application/log-service'
 
 export const rootRunner: Runner = {
   RUNNER_NAME: 'root',

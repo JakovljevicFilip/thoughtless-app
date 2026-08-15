@@ -13,10 +13,14 @@
 
 ## Open questions
 
+## Done (implementation)
+
+- Created `Platform/Boot` domain: `Booter`/`Boot`/`BooterError` contracts (mirroring `Runner`/`Run`/`RunnerError`), `root-booter.ts`, top-level `root-boot.ts` sequencing Booter phase then Runner phase.
+- Moved `Platform/Runner` → `Platform/Boot/Runner` (all importers updated).
+- Corrected an initial miscategorization: Storage's Dexie migration work (`applyPlatformVersions`/`applyMicroserviceVersions`) is a bounded, idempotent, one-shot task, not standing wiring — it's a `Run`, not a `Boot`. Moved it to `applyDexieMigrations-run.ts`, registered first in `platform-runner.ts` (ahead of `createDemoTask`/`createDarkModeEntity`, which depend on it). Deleted `Storage/Domain/StorageBoot.ts` and the old `dexie-boot.ts`. `platform-booter.ts`/`microservice-booter.ts` stay in place as empty placeholders, ready for `Booter`'s actual proof case — EventBus's subscription wiring, still pending below.
+- Collapsed `quasar.config.ts`'s `boot: [...]` from `['axios', 'storage-boot', 'runner-boot']` to `['axios', 'app-boot']`; new `src/boot/app-boot.ts` calls `runBootSequence()`.
+- Verified: lint clean, `vue-tsc --noEmit` clean, production build succeeds, confirmed in-browser (boot logs clean, task add/edit/remove still work).
+
 ## Pending implementation (ordered by dependency)
 
-1. Create a `Boot` domain, generalizing the existing `StorageBoot`/`dexie-boot` pattern.
-2. Move `Runner` to become a subdomain of `Boot`.
-3. Add a `ServiceBooter` (name TBD) subdomain that runs before `Runner` and boots actual services.
-4. Finalize `Platform/EventBus` — move Notification's subscription off `subscribeNotify-run.ts` (a Run) onto `ServiceBooter`.
-5. Collapse `quasar.config.ts`'s `boot: [...]` array down to a single entry point.
+1. Finalize `Platform/EventBus` — move Notification's subscription off `subscribeNotify-run.ts` (a Run) onto `Booter` (currently stashed, see `git stash list`).

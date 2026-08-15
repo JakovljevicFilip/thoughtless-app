@@ -7,7 +7,7 @@
  * Enables independent boot and runtime execution per microservice.
  */
 
-import type { Runner } from 'src/application/Platform/Runner/Domain/Runner'
+import type { Runner } from 'src/application/Platform/Boot/Runner/Domain/Runner'
 
 export const microserviceRunner: Runner = {
   RUNNER_NAME: 'microservice',
