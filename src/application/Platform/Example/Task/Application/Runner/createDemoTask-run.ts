@@ -14,7 +14,7 @@ import { taskStorage } from '../../Infrastructure/task-storage'
 
 import { logger } from 'src/application/Platform/Log/Application/log-service'
 
-import type { Run } from 'src/application/Platform/Runner/Domain/Run'
+import type { Run } from 'src/application/Platform/Boot/Runner/Domain/Run'
 
 export const createDemoTask: Run = {
   RUN_NAME: 'Runner.Platform.Task.CreateDemo',

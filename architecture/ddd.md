@@ -31,7 +31,7 @@
 
 1. Domain must not depend on Application or Infrastructure.
 2. Application may depend only on Domain.
-3. Infrastructure may depend on both Domain and Application.
+3. Infrastructure may depend only on Domain.
 
 ### 3.3 CQRS Enforcement
 
@@ -54,7 +54,8 @@
 
 ### 3.7 Subdomain Access Rules
 
-1. Subdomains act as internal extensions of their parent domain and must not access the parent domain directly.
+1. Subdomains act as internal extensions of their parent domain and must not access runtime values (classes, singletons, functions) from the parent domain directly.
+2. Subdomains may depend on type-only contracts (types/interfaces) exposed by their parent domain.
 
 ### 3.8 Subdomain Nesting
 
