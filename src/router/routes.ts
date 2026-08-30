@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'example/task',
         component: () =>
-          import('src/application/Platform/Example/Task/Application/Home/IndexPage.vue'),
+          import('src/application/Example/Task/Application/Home/IndexPage.vue'),
       },
     ],
   },

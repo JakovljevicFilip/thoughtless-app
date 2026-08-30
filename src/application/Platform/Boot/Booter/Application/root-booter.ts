@@ -3,7 +3,7 @@
  * -----------------------------------------------------------------------------
  * Top-level application coordinator responsible for executing all system Booters.
  *
- * - Orchestrates Platform and Microservice booters
+ * - Orchestrates Platform, Microservice, and Example booters
  * - Defines global execution order
  *
  * Serves as the single entry point into the Booter system.
@@ -12,15 +12,17 @@
 import type { Booter } from '../Domain/Booter'
 import { BooterError } from '../Domain/BooterError'
 
-import { platformBooter } from '../../../Application/platform-booter'
-import { microserviceBooter } from 'src/application/Required/Application/microservice-booter'
 import { logger } from '../../../Log/Application/log-service'
+
+import { platformBooter } from '../../../Application/platform-booter'
+import { microserviceBooter } from 'src/application/Required/Application/Microservice/microservice-booter'
+import { exampleBooter } from 'src/application/Required/Application/Example/example-booter'
 
 export const rootBooter: Booter = {
   BOOTER_NAME: 'root',
 
   async execute() {
-    logger.write(['Booter.Root.Init', 'starting platform + microservice booters'])
+    logger.write(['Booter.Root.Init', 'starting platform + microservice + example booters'])
 
     try {
       logger.write(['Booter.Platform.Init', 'running platform booters'])
@@ -36,6 +38,14 @@ export const rootBooter: Booter = {
       logger.write(['Booter.Microservice.End', 'finished all microservice booter processes'])
     } catch (error) {
       logger.write(new BooterError('Microservice.Error', error))
+    }
+
+    try {
+      logger.write(['Booter.Example.Init', 'running example booters'])
+      await exampleBooter.execute()
+      logger.write(['Booter.Example.End', 'finished all example booter processes'])
+    } catch (error) {
+      logger.write(new BooterError('Example.Error', error))
     }
 
     logger.write(['Booter.Root.End', 'finished all booter processes'])
