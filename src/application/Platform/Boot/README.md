@@ -18,7 +18,7 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
  │   └─ root-boot.ts                # Sequencer: Booter phase, then Runner phase
  ├─ Booter/
  │   ├─ Application/
- │   │   └─ root-booter.ts          # Coordinates Platform + Microservice + Example booters
+ │   │   └─ root-booter.ts          # Coordinates Platform + Example + Microservice booters
  │   ├─ Domain/
  │   │   ├─ Booter.ts               # Coordinator contract
  │   │   ├─ Boot.ts                 # Unit contract
@@ -26,7 +26,7 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
  │   └─ Booter.puml                 # Booter sequence diagram
  ├─ Runner/
  │   ├─ Application/
- │   │   └─ root-runner.ts          # Coordinates Platform + Microservice + Example runners
+ │   │   └─ root-runner.ts          # Coordinates Platform + Example + Microservice runners
  │   ├─ Domain/
  │   │   ├─ Runner.ts               # Coordinator contract
  │   │   ├─ Run.ts                  # Unit contract
@@ -35,7 +35,7 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
  └─ README.md
 ```
 
-Each scope (Platform, Microservice, Example) owns its own aggregator — `platform-booter.ts`/`platform-runner.ts` live in `Platform/Application/`, `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/Microservice/`, `example-booter.ts`/`example-runner.ts` live in `Required/Application/Example/` — not inside `Boot` itself. `Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
+Each scope (Platform, Example, Microservice) owns its own aggregator — `platform-booter.ts`/`platform-runner.ts` live in `Platform/Application/`, `example-booter.ts`/`example-runner.ts` live in `Required/Application/Example/`, `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/Microservice/` — not inside `Boot` itself. `Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
 
 ## 3. Purpose
 

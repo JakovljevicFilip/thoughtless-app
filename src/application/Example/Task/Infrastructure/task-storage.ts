@@ -10,7 +10,7 @@ class TaskStorage implements TaskRepository {
 
   constructor() {
     const client = StorageMaker.make('Task')
-    client.changeToPlatformClient()
+    client.changeToExampleClient()
     this.repo = new TaskDexie(client)
   }
 

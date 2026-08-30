@@ -10,17 +10,22 @@
  * DexieClient calls these static methods to perform operations.
  */
 import { platformDb } from 'src/application/Platform/Infrastructure/Storage/Dexie/platform-versions'
+import { exampleDb } from 'src/application/Required/Infrastructure/Storage/Dexie/Example/example-versions'
 import { microserviceDb } from 'src/application/Required/Infrastructure/Storage/Dexie/microservice-versions'
 
 import { type Dexie, type IndexableType, type Table } from 'dexie'
 
 export class DexieAggregate {
-  static makeMicroserviceDb(): Dexie {
-    return microserviceDb
-  }
-
   static makePlatformDb(): Dexie {
     return platformDb
+  }
+
+  static makeExampleDb(): Dexie {
+    return exampleDb
+  }
+
+  static makeMicroserviceDb(): Dexie {
+    return microserviceDb
   }
 
   private static table<T extends Record<string, unknown>>(

@@ -3,7 +3,7 @@
 ## 1. Overview
 
 1. Defines the system-level domains and how they relate to one another.
-2. Establishes dependency rules and boundaries between Platform, Required, Shared, Microservice, and Example domains.
+2. Establishes dependency rules and boundaries between Platform, Required, Shared, Example, and Microservice domains.
 
 ## 2. Core Principles
 
@@ -30,9 +30,9 @@
 
 1. Platform may depend on Required.
 2. Shared may depend on Platform and Required.
-3. Microservice and Example may depend on Platform, Shared, and Required.
-4. Microservice and Example domains may not depend on one another.
-5. No domain may depend on Microservice or Example.
+3. Example and Microservice may depend on Platform, Shared, and Required.
+4. Example and Microservice domains may not depend on one another.
+5. No domain may depend on Example or Microservice.
 
 ### 3.3 Subdomain Extraction Rules
 
