@@ -35,7 +35,7 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
  └─ README.md
 ```
 
-Each scope (Platform, Example, Microservice) owns its own aggregator — `platform-booter.ts`/`platform-runner.ts` live in `Platform/Application/`, `example-booter.ts`/`example-runner.ts` live in `Required/Application/Example/`, `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/Microservice/` — not inside `Boot` itself. `Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
+Each scope (Platform, Example, Microservice) owns its own aggregator — `platform-booter.ts`/`platform-runner.ts` live in `Platform/_Platform/Application/`, `example-booter.ts`/`example-runner.ts` live in `Required/Application/Example/`, `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/Microservice/` — not inside `Boot` itself. `Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
 
 ## 3. Purpose
 

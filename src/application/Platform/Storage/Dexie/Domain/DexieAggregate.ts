@@ -9,7 +9,7 @@
  *
  * DexieClient calls these static methods to perform operations.
  */
-import { platformDb } from 'src/application/Platform/Infrastructure/Storage/Dexie/platform-versions'
+import { platformDb } from 'src/application/Platform/_Platform/Infrastructure/Storage/Dexie/platform-versions'
 import { exampleDb } from 'src/application/Required/Infrastructure/Storage/Dexie/Example/example-versions'
 import { microserviceDb } from 'src/application/Required/Infrastructure/Storage/Dexie/microservice-versions'
 

@@ -39,6 +39,7 @@
 1. Create a subdomain when a newly added feature requires access to two or more layers (Domain, Application, Infrastructure).
 2. Create or avoid creating a subdomain if the user explicitly specifies the desired structure.
 3. Do not introduce subdomains when the feature is small enough to fit within the existing domain without mixing responsibilities.
+4. `_{DomainName}` self-layering folders (see `architecture/ddd.md` §3.8) are not created via these rules and are not subdomains.
 
 ### 3.4 Platform Domains Dependancy
 
@@ -50,3 +51,4 @@
 ### 4.1 Change Log
 
 1. v1.0 — Initial conversion to Markdown.
+2. v1.1 — Cross-referenced the `_{DomainName}` self-layering convention.

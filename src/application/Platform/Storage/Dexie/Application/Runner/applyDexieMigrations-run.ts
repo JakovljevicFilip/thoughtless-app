@@ -1,4 +1,4 @@
-import { applyPlatformVersions } from 'src/application/Platform/Infrastructure/Storage/Dexie/platform-versions'
+import { applyPlatformVersions } from 'src/application/Platform/_Platform/Infrastructure/Storage/Dexie/platform-versions'
 import { applyExampleVersions } from 'src/application/Required/Infrastructure/Storage/Dexie/Example/example-versions'
 import { applyMicroserviceVersions } from 'src/application/Required/Infrastructure/Storage/Dexie/microservice-versions'
 

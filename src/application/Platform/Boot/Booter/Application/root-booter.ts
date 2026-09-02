@@ -14,7 +14,7 @@ import { BooterError } from '../Domain/BooterError'
 
 import { logger } from '../../../Log/Application/log-service'
 
-import { platformBooter } from '../../../Application/platform-booter'
+import { platformBooter } from '../../../_Platform/Application/platform-booter'
 import { exampleBooter } from 'src/application/Required/Application/Example/example-booter'
 import { microserviceBooter } from 'src/application/Required/Application/Microservice/microservice-booter'
 
