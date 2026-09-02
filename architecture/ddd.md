@@ -61,9 +61,11 @@
 
 1. Subdomains nest beneath their parent using `{Subdomain}/{Layer};`
 2. Nesting can continue as long as the scope warrants.
+3. Once a domain has subdomain(s), its own layering lives inside `_{DomainName}/{Layer}` — e.g. `Platform/_Platform/Application/platform-booter.ts`.
 
 ## 4. Reference
 
 ### 4.1 Change Log
 
 1.  v1.0 — Initial conversion to Markdown.
+2.  v1.1 — Added the `_{DomainName}` self-layering nesting convention.

@@ -1,4 +1,5 @@
-import { applyPlatformVersions } from 'src/application/Platform/Infrastructure/Storage/Dexie/platform-versions'
+import { applyPlatformVersions } from 'src/application/Platform/_Platform/Infrastructure/Storage/Dexie/platform-versions'
+import { applyExampleVersions } from 'src/application/Required/Infrastructure/Storage/Dexie/Example/example-versions'
 import { applyMicroserviceVersions } from 'src/application/Required/Infrastructure/Storage/Dexie/microservice-versions'
 
 import { logger } from 'src/application/Platform/Log/Application/log-service'
@@ -11,6 +12,7 @@ export const applyDexieMigrations: Run = {
   async run() {
     logger.write([this.RUN_NAME, 'applying dexie migrations'])
     await applyPlatformVersions()
+    await applyExampleVersions()
     await applyMicroserviceVersions()
   },
 }

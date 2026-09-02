@@ -1,0 +1,10 @@
+@startuml
+title Booter Sequence
+
+AppBoot --> RootBoot : runBootSequence()
+RootBoot --> RootBooter : execute()
+RootBooter --> PlatformBooter : execute()
+RootBooter --> MicroserviceBooter : execute()
+RootBooter --> ExampleBooter : execute()
+
+@enduml

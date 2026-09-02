@@ -1,0 +1,10 @@
+@startuml
+title Runner Sequence
+
+AppBoot --> RootBoot : runBootSequence()
+RootBoot --> RootRunner : execute()
+RootRunner --> PlatformRunner : execute()
+RootRunner --> MicroserviceRunner : execute()
+RootRunner --> ExampleRunner : execute()
+
+@enduml

@@ -18,23 +18,30 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
  │   └─ root-boot.ts                # Sequencer: Booter phase, then Runner phase
  ├─ Booter/
  │   ├─ Application/
- │   │   └─ root-booter.ts          # Coordinates Platform + Microservice booters
- │   └─ Domain/
- │       ├─ Booter.ts               # Coordinator contract
- │       ├─ Boot.ts                 # Unit contract
- │       └─ BooterError.ts          # Typed error
+ │   │   └─ root-booter.ts          # Coordinates Platform + Example + Microservice booters
+ │   ├─ Domain/
+ │   │   ├─ Booter.ts               # Coordinator contract
+ │   │   ├─ Boot.ts                 # Unit contract
+ │   │   └─ BooterError.ts          # Typed error
+ │   └─ Booter.puml                 # Booter sequence diagram
  ├─ Runner/
  │   ├─ Application/
- │   │   └─ root-runner.ts          # Coordinates Platform + Microservice runners
- │   └─ Domain/
- │       ├─ Runner.ts               # Coordinator contract
- │       ├─ Run.ts                  # Unit contract
- │       └─ RunnerError.ts          # Typed error
- ├─ Boot.puml
+ │   │   └─ root-runner.ts          # Coordinates Platform + Example + Microservice runners
+ │   ├─ Domain/
+ │   │   ├─ Runner.ts               # Coordinator contract
+ │   │   ├─ Run.ts                  # Unit contract
+ │   │   └─ RunnerError.ts          # Typed error
+ │   └─ Runner.puml                 # Runner sequence diagram
  └─ README.md
 ```
 
-Each scope (Platform, Microservice) owns its own aggregator — `platform-booter.ts`/`platform-runner.ts` live in `Platform/Application/`, `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/` — not inside `Boot` itself. `Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
+Each scope owns its own aggregator — not inside `Boot` itself:
+
+1. Platform — `platform-booter.ts`/`platform-runner.ts` live in `Platform/_Platform/Application/`.
+2. Example — `example-booter.ts`/`example-runner.ts` live in `Required/Application/Example/`.
+3. Microservice — `microservice-booter.ts`/`microservice-runner.ts` live in `Required/Application/Microservice/`.
+
+`Boot` only owns the shared contracts and the root-level sequencing; it never needs to know what any specific domain registers.
 
 ## 3. Purpose
 
