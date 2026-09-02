@@ -12,9 +12,10 @@
  *
  * All operations delegate directly to DexieAggregate.
  */
+import { assertDexieORM, assertPrimaryKey } from './invariant-helper'
+
 import type { DexieRepository, DexieORM } from '../Domain/DexieRepository'
 import { DexieAggregate } from '../Domain/DexieAggregate'
-import { assertDexieORM, assertPrimaryKey } from './invariant-helper'
 import type { DexieStorageClient } from '../Domain/DexieStorageClient'
 
 import type Dexie from 'dexie'
