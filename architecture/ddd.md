@@ -61,7 +61,7 @@
 
 1. Subdomains nest beneath their parent using `{Subdomain}/{Layer};`
 2. Nesting can continue as long as the scope warrants.
-3. A domain that needs both its own `Domain`/`Application`/`Infrastructure` layering *and* one or more subdomains nests its own layering under `_{DomainName}/{Layer}` — e.g. `Platform/_Platform/Application/`. This distinguishes "the domain's own logic" from "a subdomain of the domain." `_{DomainName}` is not itself a subdomain: it's exempt from the Subdomain Extraction Rules (`domain.md` §3.3) and from the Subdomain Access Rules (§3.7) — it's an extension of the domain, not a child of it.
+3. Once a domain has subdomain(s), its own layering lives inside `_{DomainName}/{Layer}` — e.g. `Platform/_Platform/Application/platform-booter.ts`.
 
 ## 4. Reference
 

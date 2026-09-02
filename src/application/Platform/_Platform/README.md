@@ -2,10 +2,8 @@
 
 ## 1. Overview
 
-Holds `Platform`'s own composition — the standing wiring and bounded tasks that
-assemble Platform's *own* capability subdomains (`DarkMode`, `Storage`, …)
-into the `Boot` lifecycle, plus Platform's own Dexie schema. None of this
-defines a new capability; it only wires existing ones together.
+Platform's own domain layer — houses platform-level registrations for
+various utilities, such as `Boot` and `Storage`.
 
 The `_Platform` name marks it as *not* a capability subdomain — a directory
 prefixed with `_{DomainName}` holds that domain's own `Domain`/`Application`/
