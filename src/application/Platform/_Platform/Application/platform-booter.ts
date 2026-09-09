@@ -7,7 +7,7 @@
  */
 import type { Booter } from '../../Boot/Booter/Domain/Booter'
 
-import { notifySubscriber } from '../../Notification/InApp/Application/Event/notify-subscriber'
+import { notifySubscriber } from '../../Notification/InApp/Application/Event/notify-subscribers'
 
 export const platformBooter: Booter = {
   BOOTER_NAME: 'platform',

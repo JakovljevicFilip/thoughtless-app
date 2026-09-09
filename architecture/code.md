@@ -16,14 +16,14 @@
 ### 3.1 Style Rules
 
 1. Maximum file length is 120 lines.
-2. Should a file exceed 120 lines part(s) of it should be moved to a helper files, as defined in files.md.
-3. UI components may be refactored by extracting logic into composables, as defined in files.md.
+2. Should a file exceed 120 lines, part(s) of it should be moved to a helper file.
+3. UI components may be refactored by extracting logic into composables.
 
 ### 3.2 Import Rules
 
 1. All file imports must be grouped into the following types:
    1. Helpers.
-      1. Modules matching the `{parent|functionality}-helper.ts` naming convention defined in files.md, section 3.3.4.1 — shared extracted logic for large files within the same domain or layer.
+      1. Modules matching the `{parent|functionality}-helper.ts` naming convention — shared extracted logic for large files within the same domain or layer.
    2. Vue components.
       1. Vue single-file components (`.vue`) or modules that clearly export a component, regardless of whether they are imported via aliases or relative paths.
    3. Domain/runtime bindings.

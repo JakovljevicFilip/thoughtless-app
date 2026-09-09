@@ -10,10 +10,10 @@ The goal is to standardize user-facing feedback (success, info, warnings, errors
 ```text
 /src/application/Platform/Notification/InApp/
  ├─ Application/
- │   ├─ inAppNotification-service.ts      # Low-level adapter API — called only by notify-subscriber, not by feature domains directly
+ │   ├─ inAppNotification-service.ts      # Low-level adapter API — called only by notify-subscribers, not by feature domains directly
  │   └─ Event/
- │       ├─ notify-publisher.ts            # Public entry point for feature domains — publishes a notify event onto the EventBus
- │       └─ notify-subscriber.ts           # Boot: subscribes the notify topic, forwards to inAppNotification-service
+ │       ├─ notify-publishers.ts            # Public entry point for feature domains — publishes a notify event onto the EventBus
+ │       └─ notify-subscribers.ts           # Boot: subscribes the notify topic, forwards to inAppNotification-service
  ├─ Domain/
  │   └─ InAppNotification.ts              # Adapter interface
  ├─ Infrastructure/
@@ -40,7 +40,7 @@ this domain's own `Domain/Event/` — it's an Event Registry, placed at
 ### Application code
 
 ```ts
-import { notifyPublisher } from './application/Platform/Notification/InApp/Application/Event/notify-publisher'
+import { notifyPublisher } from './application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
 notifyPublisher.success('Saved successfully!')
 notifyPublisher.warning('Something feels off…')

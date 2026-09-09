@@ -7,7 +7,7 @@
 
 import { useStationStore } from './station-store'
 
-import { stationPublisher } from './Event/station-publisher'
+import { stationPublisher } from './Event/station-publishers'
 
 export const stationService = {
   receiveOrder(orderId: string, item: string): void {

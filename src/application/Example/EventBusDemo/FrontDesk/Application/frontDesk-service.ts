@@ -7,15 +7,14 @@
 
 import { useFrontDeskStore } from './frontDesk-store'
 
-import { frontDeskRules } from '../Domain/Rules/frontDesk-rules'
+import { FrontDeskAggregate } from '../Domain/FrontDeskAggregate'
 
-import { frontDeskPublisher } from './Event/frontDesk-publisher'
+import { frontDeskPublisher } from './Event/frontDesk-publishers'
 
 export const frontDeskService = {
   placeOrder(item: string): void {
-    frontDeskRules.canPlaceOrder(item)
+    const order = FrontDeskAggregate.place(item)
 
-    const order = { id: crypto.randomUUID(), item, status: 'placed' as const, sentAgain: false }
     const store = useFrontDeskStore()
     store.add(order)
 

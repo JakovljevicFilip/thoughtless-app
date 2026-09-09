@@ -16,7 +16,7 @@ import { taskRemoveHandler } from './CQRS/Command/Remove/remove-handler'
 
 import { taskListHandler } from './CQRS/Query/List/list-handler'
 
-import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publisher'
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
 import type { Task } from '../../Domain/Task'
 

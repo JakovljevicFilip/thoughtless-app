@@ -8,8 +8,8 @@
 
 import type { Booter } from 'src/application/Platform/Boot/Booter/Domain/Booter'
 
-import { frontDeskSubscriber } from 'src/application/Example/EventBusDemo/FrontDesk/Application/Event/frontDesk-subscriber'
-import { stationSubscriber } from 'src/application/Example/EventBusDemo/Station/Application/Event/station-subscriber'
+import { frontDeskSubscriber } from 'src/application/Example/EventBusDemo/FrontDesk/Application/Event/frontDesk-subscribers'
+import { stationSubscriber } from 'src/application/Example/EventBusDemo/Station/Application/Event/station-subscribers'
 
 export const exampleBooter: Booter = {
   BOOTER_NAME: 'example',

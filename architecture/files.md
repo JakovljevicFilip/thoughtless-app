@@ -80,9 +80,9 @@
 
 1. Event Registry ({SystemDomain}/{Events}.ts under _Platform/Event/Domain or Required/Event/Domain)
    1. Domain-layer file defining the topic constants a Publisher/Subscriber pair communicates over; placed under the owning system domain's own registry location.
-2. Publisher ({domain}-publisher.ts, under Application/Event/)
+2. Publisher ({domain}-publishers.ts, under Application/Event/)
    1. Application-layer file grouping all of a domain's EventBus publish calls, one method per event.
-3. Subscriber ({domain}-subscriber.ts, under Application/Event/)
+3. Subscriber ({domain}-subscribers.ts, under Application/Event/)
    1. Application-layer file grouping all of a domain's EventBus subscriptions into a single Boot.
 
 ### 3.5 Other
