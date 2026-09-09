@@ -76,7 +76,16 @@
 2. Repository Client ({aggregate}-{implementation}.ts)
    1. Specific implementation of the persistence mechanism used by the repository.
 
-#### 3.3.4 Other
+### 3.4 Events
+
+1. Event Registry ({SystemDomain}/{Events}.ts under _Platform/Event/Domain or Required/Event/Domain)
+   1. Domain-layer file defining the topic constants a Publisher/Subscriber pair communicates over; placed under the owning system domain's own registry location.
+2. Publisher ({domain}-publisher.ts, under Application/Event/)
+   1. Application-layer file grouping all of a domain's EventBus publish calls, one method per event.
+3. Subscriber ({domain}-subscriber.ts, under Application/Event/)
+   1. Application-layer file grouping all of a domain's EventBus subscriptions into a single Boot.
+
+### 3.5 Other
 
 1. Helper ({parent|functionality}-helper.ts)
    1. Shared extracted logic for large files within the same domain or layer.
@@ -92,8 +101,6 @@
    1. Concrete technology-specific implementation used by a Maker.
 7. Client Vendor (Client/{name}-{client}.ts)
    1. Vendor-specific client implementation.
-8. Event Contract (Event/{Event}.ts)
-   1. Defines a topic identifier and payload shape published/consumed through the EventBus; owned by the domain that interprets the event, not by the EventBus domain itself.
 
 ## 4. Reference
 

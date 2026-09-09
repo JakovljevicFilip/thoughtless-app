@@ -14,6 +14,11 @@ const routes: RouteRecordRaw[] = [
         component: () =>
           import('src/application/Example/Task/Application/Home/IndexPage.vue'),
       },
+      {
+        path: 'example/event-bus-demo',
+        component: () =>
+          import('src/application/Example/EventBusDemo/Application/IndexPage.vue'),
+      },
     ],
   },
 

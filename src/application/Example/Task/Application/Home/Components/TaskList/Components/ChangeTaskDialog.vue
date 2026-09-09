@@ -42,8 +42,6 @@
 
   import type { Task } from 'src/application/Example/Task/Domain/Task'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
-
   import { ref, computed } from 'vue'
 
   const { task } = defineProps<{
@@ -65,7 +63,6 @@
 
     await run(async () => {
       await taskService.change(task, body.value)
-      notify.success('Task updated successfully.')
       close()
     })
   }
