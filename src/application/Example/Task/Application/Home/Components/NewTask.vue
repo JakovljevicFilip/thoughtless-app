@@ -33,7 +33,6 @@
   import { useAsyncSubmitState } from 'src/application/Example/Task/Application/Home/Components/Composable/useAsyncSubmitState'
   import { taskInput } from './Input/task-input'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
   import { taskService } from '../../Service/task-service'
 
   import { ref, computed } from 'vue'
@@ -45,7 +44,6 @@
     await run(async () => {
       await taskService.add(body.value)
       body.value = ''
-      notify.success('Task added successfully.')
     })
   }
 

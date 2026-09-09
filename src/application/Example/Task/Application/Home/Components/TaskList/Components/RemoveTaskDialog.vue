@@ -31,8 +31,6 @@
 
   import type { Task } from 'src/application/Example/Task/Domain/Task'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
-
   import { ref, computed } from 'vue'
 
   const props = defineProps<{
@@ -58,9 +56,8 @@
       isSubmitting.value = true
       await taskService.remove(props.task)
       model.value = false
-      notify.success('Task removed.')
     } catch {
-      notify.warning('Task removal failed. Please try again.')
+      // taskService already dispatched the failure notification
     } finally {
       isSubmitting.value = false
     }

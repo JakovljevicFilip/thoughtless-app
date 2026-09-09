@@ -16,6 +16,8 @@ import { taskRemoveHandler } from './CQRS/Command/Remove/remove-handler'
 
 import { taskListHandler } from './CQRS/Query/List/list-handler'
 
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
+
 import type { Task } from '../../Domain/Task'
 
 export const taskService = {
@@ -23,16 +25,24 @@ export const taskService = {
   async add(content: string): Promise<void> {
     await taskAddHandler.add(content)
     await this.list()
+    notifyPublisher.success('Task added successfully.')
   },
 
   async change(task: Task, changedBody: string): Promise<void> {
     await taskChangeHandler.change(task, changedBody)
     await this.list()
+    notifyPublisher.success('Task updated successfully.')
   },
 
   async remove(task: Task): Promise<void> {
-    await taskRemoveHandler.remove(task)
-    await this.list()
+    try {
+      await taskRemoveHandler.remove(task)
+      await this.list()
+      notifyPublisher.success('Task removed.')
+    } catch (error) {
+      notifyPublisher.warning('Task removal failed. Please try again.')
+      throw error
+    }
   },
 
   // QUERY

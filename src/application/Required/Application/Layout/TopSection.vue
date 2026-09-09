@@ -16,6 +16,10 @@
         <q-separator vertical inset class="q-mx-sm" />
 
         <q-btn flat dense label="Example" to="/example/task" />
+
+        <q-separator vertical inset class="q-mx-sm" />
+
+        <q-btn flat dense label="Event Bus Demo" to="/example/event-bus-demo" />
       </q-toolbar-title>
 
       <!-- Pushes version to the right -->
