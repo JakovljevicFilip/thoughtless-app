@@ -4,7 +4,7 @@ import type { DarkModeRepository } from '../Domain/DarkModeRepository'
 import type { DarkMode } from '../Domain/DarkMode'
 import type { DarkModeId } from '../Domain/ValueObject/DarkModeId'
 
-import { StorageMaker } from 'src/application/Platform/Storage/Infrastructure/storage-maker'
+import { StorageMaker } from 'src/application/Platform/Storage/_Storage/Infrastructure/storage-maker'
 
 class DarkModeStorage implements DarkModeRepository {
   private readonly repo: DarkModeRepository

@@ -14,9 +14,7 @@ prefixed with `_{DomainName}` holds that domain's own `Domain`/`Application`/
 
 ```text
 /src/application/Example/_Example/
- ├─ Application/
- │   └─ Layout/
- │       └─ TopSection.vue   # Header/toolbar + notice banner shared by Example's 3 pages
+ ├─ Application/Layout/TopSection.vue   # Header/toolbar + notice banner shared by Example's 3 pages
  └─ README.md
 ```
 
@@ -35,4 +33,4 @@ Consumed directly by:
 
 - `src/application/Example/Documentation/Application/IndexPage.vue`
 - `src/application/Example/Task/Application/Home/IndexPage.vue`
-- `src/application/Example/EventBusDemo/Application/IndexPage.vue`
+- `src/application/Example/EventBusDemo/_EventBusDemo/Application/IndexPage.vue`

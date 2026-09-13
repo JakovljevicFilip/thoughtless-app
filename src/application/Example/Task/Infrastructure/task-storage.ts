@@ -2,7 +2,7 @@ import type { Task } from '../Domain/Task'
 import type { TaskRepository } from '../Domain/TaskRepository'
 import type { TaskId } from '../Domain/ValueObject/TaskId'
 
-import { StorageMaker } from 'src/application/Platform/Storage/Infrastructure/storage-maker'
+import { StorageMaker } from 'src/application/Platform/Storage/_Storage/Infrastructure/storage-maker'
 import { TaskDexie } from './Client/task-dexie'
 
 class TaskStorage implements TaskRepository {

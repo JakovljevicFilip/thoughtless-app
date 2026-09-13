@@ -1,4 +1,4 @@
-import { AggregateSettings } from "../../AggregateSchema/Domain/AggregateSettings"
+import { AggregateSettings } from "../../../AggregateSchema/Domain/AggregateSettings"
 
 export type StorageDriver = 'dexie' // future: | 'sqlite' | 'pgsql'
 

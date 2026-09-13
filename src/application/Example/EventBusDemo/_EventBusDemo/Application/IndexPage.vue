@@ -28,8 +28,8 @@
 <script setup lang="ts">
   import TopSection from 'src/application/Example/_Example/Application/Layout/TopSection.vue'
 
-  import FrontDeskPanel from '../FrontDesk/Application/FrontDeskPanel.vue'
-  import StationPanel from '../Station/Application/StationPanel.vue'
+  import FrontDeskPanel from '../../FrontDesk/Application/FrontDeskPanel.vue'
+  import StationPanel from '../../Station/Application/StationPanel.vue'
 </script>
 
 <style scoped>

@@ -16,7 +16,7 @@ Neither domain ever imports the other's service, store, or event contracts direc
  └─ OrderEvents.ts   # all four Order* topic constants, grouped by domain
 
 /src/application/Example/EventBusDemo/
- ├─ Application/IndexPage.vue           # Composite demo page — imports both panels, display only
+ ├─ _EventBusDemo/Application/IndexPage.vue   # Composite demo page — imports both panels, display only
  ├─ FrontDesk/
  │   ├─ Domain/
  │   │   ├─ Order.ts                      # { id, item, status: 'placed' | 'ready', sentAgain }
