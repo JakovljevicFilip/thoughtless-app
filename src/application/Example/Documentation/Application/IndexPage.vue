@@ -1,0 +1,22 @@
+<template>
+  <TopSection />
+
+  <q-page class="q-pa-md">
+    <LogExample />
+    <q-separator spaced />
+    <InAppNotificationExample />
+    <q-separator spaced />
+    <NoticeExample />
+    <q-separator spaced />
+    <DarkModeExample />
+  </q-page>
+</template>
+
+<script setup lang="ts">
+  import TopSection from 'src/application/Example/_Example/Application/Layout/TopSection.vue'
+
+  import LogExample from './Components/LogExample.vue'
+  import InAppNotificationExample from './Components/InAppNotificationExample.vue'
+  import NoticeExample from './Components/NoticeExample.vue'
+  import DarkModeExample from './Components/DarkModeExample.vue'
+</script>

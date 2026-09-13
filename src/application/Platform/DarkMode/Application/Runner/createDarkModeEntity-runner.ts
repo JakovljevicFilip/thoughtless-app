@@ -3,7 +3,7 @@ import { darkModeStorage } from '../../Infrastructure/darkMode-storage'
 
 import { logger } from 'src/application/Platform/Log/Application/log-service'
 
-import type { Run } from 'src/application/Platform/Runner/Domain/Run'
+import type { Run } from 'src/application/Platform/Boot/Runner/Domain/Run'
 
 export const createDarkModeEntity: Run = {
   RUN_NAME: 'Runner.Platform.DarkMode.CreateDarkModeEntity',

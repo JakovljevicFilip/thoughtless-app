@@ -3,7 +3,7 @@ import { ThoughtDexie } from './Client/Dexie/thought-dexie'
 import type { ThoughtRepository } from '../Domain/ThoughtRepository'
 import type { Thought } from '../Domain/Thought'
 
-import { StorageMaker } from 'src/application/Platform/Storage/Infrastructure/storage-maker'
+import { StorageMaker } from 'src/application/Platform/Storage/_Storage/Infrastructure/storage-maker'
 
 class ThoughtStorage implements ThoughtRepository {
   private readonly repo: ThoughtRepository

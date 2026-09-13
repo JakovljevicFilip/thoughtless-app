@@ -21,7 +21,9 @@
    1. Contains implementations that Platform depends on and must be provided by the microservice.
 3. Shared
    1. Contains components and services reused across multiple Microservice domains.
-4. Microservice
+4. Example
+   1. Contains demo/reference implementations that illustrate the domain-layering pattern and Platform utilities.
+5. Microservice
    1. Contains business-specific domains that define application features and behavior.
 
 ### 3.2 src/boot — Boot Files

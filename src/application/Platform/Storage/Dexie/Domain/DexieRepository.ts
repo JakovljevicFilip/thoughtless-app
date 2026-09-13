@@ -17,5 +17,6 @@ export interface DexieRepository {
    * Switch DB context for this client instance.
    */
   changeToPlatformClient(): void
+  changeToExampleClient(): void
   changeToMicroserviceClient(): void
 }

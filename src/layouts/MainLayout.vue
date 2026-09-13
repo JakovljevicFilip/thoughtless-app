@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <TopSection />
+    <AppHeader />
 
     <q-page-container>
       <router-view />
@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-  import TopSection from 'src/application/Required/Application/Layout/TopSection.vue'
+  import AppHeader from 'src/application/Required/Application/Layout/AppHeader.vue'
 
   import PlatformConfig from 'src/config/platform-config'
 
