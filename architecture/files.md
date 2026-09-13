@@ -58,17 +58,15 @@
    1. Read-side CQRS unit retrieves domain state as application-layer entities.
 5. Domain Parser ({aggregate}-parser.ts)
    1. Converts domain aggregates into application-facing entities.
-6. Response Contract (Response/{Method}Response.ts)
-   1. Defines the contract between Application and Infrastructure for data returned from Infrastructure.
-7. Application Entity (Types/{ApplicationEntity}.ts)
+6. Application Entity (Types/{ApplicationEntity}.ts)
    1. UI-facing type defines view-model data structures.
-8. Application Error ({Aggregate}ApplicationError.ts)
+7. Application Error ({Aggregate}ApplicationError.ts)
    1. Typed error for application-level failures.
-9. Runner ({feature}-run.ts)
+8. Runner ({feature}-run.ts)
    1. Execution unit implementing Runner.
-10. Composable (use{Functionality}.ts)
-    1. Vue composable encapsulating reusable reactive application behavior.
-11. Input Validation Helper (Input/{field|form|usecase}-input.ts)
+9. Composable (use{Functionality}.ts)
+   1. Vue composable encapsulating reusable reactive application behavior.
+10. Input Validation Helper (Input/{field|form|usecase}-input.ts)
     1. Declarative, UI-level input validation rules and helpers used by Vue components to validate form state and derive submit eligibility.
 
 #### 3.3.3 Infrastructure Layer Schema
@@ -78,7 +76,16 @@
 2. Repository Client ({aggregate}-{implementation}.ts)
    1. Specific implementation of the persistence mechanism used by the repository.
 
-#### 3.3.4 Other
+### 3.4 Events
+
+1. Event Registry ({SystemDomain}/{Events}.ts under _Platform/Event/Domain or Required/Event/Domain)
+   1. Domain-layer file defining the topic constants a Publisher/Subscriber pair communicates over; placed under the owning system domain's own registry location.
+2. Publisher ({domain}-publishers.ts, under Application/Event/)
+   1. Application-layer file grouping all of a domain's EventBus publish calls, one method per event.
+3. Subscriber ({domain}-subscribers.ts, under Application/Event/)
+   1. Application-layer file grouping all of a domain's EventBus subscriptions into a single Boot.
+
+### 3.5 Other
 
 1. Helper ({parent|functionality}-helper.ts)
    1. Shared extracted logic for large files within the same domain or layer.

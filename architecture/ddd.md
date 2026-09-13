@@ -31,7 +31,7 @@
 
 1. Domain must not depend on Application or Infrastructure.
 2. Application may depend only on Domain.
-3. Infrastructure may depend on both Domain and Application.
+3. Infrastructure may depend only on Domain.
 
 ### 3.3 CQRS Enforcement
 
@@ -54,15 +54,30 @@
 
 ### 3.7 Subdomain Access Rules
 
-1. Subdomains act as internal extensions of their parent domain and must not access the parent domain directly.
+1. Subdomains act as internal extensions of their parent domain and must not access runtime values (classes, singletons, functions) from the parent domain directly.
+2. Subdomains may depend on type-only contracts (types/interfaces) exposed by their parent domain.
 
 ### 3.8 Subdomain Nesting
 
 1. Subdomains nest beneath their parent using `{Subdomain}/{Layer};`
 2. Nesting can continue as long as the scope warrants.
+3. Once a domain has subdomain(s), its own layering lives inside `_{DomainName}/{Layer}` — e.g. `Platform/_Platform/Application/platform-booter.ts`.
+
+### 3.9 Aggregate Entity Construction
+
+1. An Aggregate Entity must be constructed only by its own Aggregate, through a factory method (e.g. `record`, `change`, `rebuild`, `createEntity`) that validates invariants via the aggregate's Domain Rules before constructing the entity.
+2. Application layer code (Commands, Handlers, Services) must never construct an Aggregate Entity directly; it passes raw input to the Aggregate's factory methods and receives the constructed entity back.
+
+### 3.10 Domain Boundary Integrity
+
+1. Any data leaving the domain — persisted through Infrastructure, published as an Event, or otherwise handed to an external system — must originate from a valid Aggregate Entity constructed by its Aggregate, even if only part of that entity's data is used.
+2. Application layer code must never assemble ad hoc shapes for persistence or event payloads; it may only pass through data derived from an Aggregate Entity.
 
 ## 4. Reference
 
 ### 4.1 Change Log
 
 1.  v1.0 — Initial conversion to Markdown.
+2.  v1.1 — Added the `_{DomainName}` self-layering nesting convention.
+3.  v1.2 — Added the Aggregate Entity Construction rule.
+4.  v1.3 — Added the Domain Boundary Integrity rule.

@@ -7,13 +7,15 @@
  * - Defaults to Microservice DB
  * - Supports switching DB at runtime:
  *     changeToPlatformClient()
+ *     changeToExampleClient()
  *     changeToMicroserviceClient()
  *
  * All operations delegate directly to DexieAggregate.
  */
+import { assertDexieORM, assertPrimaryKey } from './invariant-helper'
+
 import type { DexieRepository, DexieORM } from '../Domain/DexieRepository'
 import { DexieAggregate } from '../Domain/DexieAggregate'
-import { assertDexieORM, assertPrimaryKey } from './invariant-helper'
 import type { DexieStorageClient } from '../Domain/DexieStorageClient'
 
 import type Dexie from 'dexie'
@@ -29,6 +31,10 @@ export class DexieClient implements DexieStorageClient, DexieRepository {
 
   changeToPlatformClient(): void {
     this.db = DexieAggregate.makePlatformDb()
+  }
+
+  changeToExampleClient(): void {
+    this.db = DexieAggregate.makeExampleDb()
   }
 
   changeToMicroserviceClient(): void {
