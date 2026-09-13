@@ -7,8 +7,8 @@
  * - Guarantees wiring is in place before anything could depend on it
  */
 
-import { rootBooter } from '../Booter/Application/root-booter'
-import { rootRunner } from '../Runner/Application/root-runner'
+import { rootBooter } from '../../Booter/Application/root-booter'
+import { rootRunner } from '../../Runner/Application/root-runner'
 
 export async function runBootSequence(): Promise<void> {
   await rootBooter.execute()

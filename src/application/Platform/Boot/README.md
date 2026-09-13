@@ -14,8 +14,7 @@ Boot-time work splits into two different kinds of things, modeled as two subdoma
 
 ```text
 /src/application/Platform/Boot/
- ├─ Application/
- │   └─ root-boot.ts                # Sequencer: Booter phase, then Runner phase
+ ├─ _Boot/Application/root-boot.ts  # Sequencer: Booter phase, then Runner phase
  ├─ Booter/
  │   ├─ Application/
  │   │   └─ root-booter.ts          # Coordinates Platform + Example + Microservice booters
