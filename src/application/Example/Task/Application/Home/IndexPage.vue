@@ -1,4 +1,6 @@
 <template>
+  <TopSection />
+
   <q-page>
     <div class="page-title text-center">Tasks</div>
 
@@ -13,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+  import TopSection from 'src/application/Example/_Example/Application/Layout/TopSection.vue'
+
   import NewTask from './Components/NewTask.vue'
   import TaskList from './Components/TaskList/TaskList.vue'
 </script>
