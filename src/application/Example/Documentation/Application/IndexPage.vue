@@ -1,4 +1,6 @@
 <template>
+  <TopSection />
+
   <q-page class="q-pa-md">
     <LogExample />
     <q-separator spaced />
@@ -11,6 +13,8 @@
 </template>
 
 <script setup lang="ts">
+  import TopSection from 'src/application/Example/_Example/Application/Layout/TopSection.vue'
+
   import LogExample from './Components/LogExample.vue'
   import InAppNotificationExample from './Components/InAppNotificationExample.vue'
   import NoticeExample from './Components/NoticeExample.vue'
