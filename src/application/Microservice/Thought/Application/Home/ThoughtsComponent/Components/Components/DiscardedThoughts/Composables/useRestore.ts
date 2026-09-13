@@ -2,13 +2,13 @@ import type { Thought } from 'src/application/Microservice/Thought/Domain/Though
 
 import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
-import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
 export const useRestore = async (thought: Thought) => {
   try {
     await thoughtService.restore(thought)
-    notify.success('Thought restored.')
+    notifyPublisher.success('Thought restored.')
   } catch {
-    notify.warning('Thought could not be restored.')
+    notifyPublisher.warning('Thought could not be restored.')
   }
 }

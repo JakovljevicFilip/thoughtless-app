@@ -24,7 +24,7 @@
   import type { Thought } from 'src/application/Microservice/Thought/Domain/Thought'
   import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+  import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
   import { ref } from 'vue'
 
@@ -43,10 +43,10 @@
     try {
       isSubmitting.value = true
       await thoughtService.remove(removed)
-      notify.success('Task removed.')
+      notifyPublisher.success('Thought removed.')
       cancel()
     } catch {
-      notify.warning('Task removal failed. Please try again.')
+      notifyPublisher.warning('Thought removal failed. Please try again.')
     } finally {
       isSubmitting.value = false
     }

@@ -81,11 +81,11 @@
 </template>
 
 <script setup lang="ts">
+  import { getTimeRemainingFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
+
   import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
   import type { ActiveThought } from 'src/application/Microservice/Thought/Application/Types/ActiveThought'
-
-  import { getTimeRemainingFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
 
   import { useThoughtExpiry } from '../Composables/useThoughtExpiry'
   import { useCopy } from '../../Composables/useCopy'

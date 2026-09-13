@@ -2,13 +2,13 @@ import type { ActiveThought } from 'src/application/Microservice/Thought/Applica
 
 import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
-import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
 export const useDiscard = async (thought: ActiveThought) => {
   try {
     await thoughtService.discard(thought)
-    notify.success('Thought discarded.')
+    notifyPublisher.success('Thought discarded.')
   } catch {
-    notify.warning('Thought could not be discarded.')
+    notifyPublisher.warning('Thought could not be discarded.')
   }
 }

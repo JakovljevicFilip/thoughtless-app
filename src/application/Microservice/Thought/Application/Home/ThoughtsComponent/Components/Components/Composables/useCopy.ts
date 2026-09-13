@@ -1,10 +1,10 @@
-import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
 export const useCopy = async (content: string) => {
   try {
     await navigator.clipboard.writeText(content)
-    notify.success('Copied!')
+    notifyPublisher.success('Copied!')
   } catch {
-    notify.warning('Could not copy to clipboard.')
+    notifyPublisher.warning('Could not copy to clipboard.')
   }
 }

@@ -40,7 +40,7 @@
   import { thoughtInput } from '../../../Input/thought-input'
   import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+  import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
   import { ref, computed } from 'vue'
 
@@ -65,9 +65,9 @@
       await thoughtService.alter(thought, content.value)
       content.value = ''
       cancel()
-      notify.success('Thought altered successfully.')
+      notifyPublisher.success('Thought altered successfully.')
     } catch {
-      notify.warning('Thought alteration failed. Please try again.')
+      notifyPublisher.warning('Thought alteration failed. Please try again.')
     } finally {
       isSubmitting.value = false
     }

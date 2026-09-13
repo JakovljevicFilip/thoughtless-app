@@ -34,7 +34,7 @@
   import { useThoughtStore } from '../../../thought-store'
   import { thoughtInput } from './Input/thought-input'
 
-  import { notify } from 'src/application/Platform/Notification/InApp/Application/inAppNotification-service'
+  import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
   import { computed, ref } from 'vue'
   import { storeToRefs } from 'pinia'
@@ -58,10 +58,10 @@
       isSubmitting.value = true
       await thoughtService.record(content.value)
       content.value = ''
-      notify.success('Thought recorded.')
+      notifyPublisher.success('Thought recorded.')
     } catch (error) {
       if (error instanceof ThoughtApplicationError) return
-      notify.warning('Thought record failed. Please try again.')
+      notifyPublisher.warning('Thought record failed. Please try again.')
     } finally {
       isSubmitting.value = false
     }
