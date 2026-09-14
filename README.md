@@ -71,7 +71,7 @@ cp .env.example .env
 
 Adjust any values in `.env` as needed for the target environment.
 
-#### 3. Docker setup
+#### 3a. Docker setup
 
 From the project root, build and start the stack:
 
@@ -99,7 +99,7 @@ If you also ran the Android APK process, clean up that separate compose stack to
 docker compose -f docker-compose.android.yml down -v
 ```
 
-### 3. Run locally
+#### 3b. Run locally
 
 Install dependencies:
 
