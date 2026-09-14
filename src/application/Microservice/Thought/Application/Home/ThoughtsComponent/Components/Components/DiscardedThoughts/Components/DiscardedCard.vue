@@ -6,7 +6,7 @@
     style="border: 1px solid secondary"
   >
     <q-card-section class="q-pt-sm q-pb-sm">
-      <div class="text-body2" style="white-space: pre-line">
+      <div class="text-body2 thought-content">
         {{ thought.content }}
       </div>
     </q-card-section>
@@ -49,3 +49,11 @@
     (e: 'remove'): void
   }>()
 </script>
+
+<style>
+  .thought-content {
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+</style>
