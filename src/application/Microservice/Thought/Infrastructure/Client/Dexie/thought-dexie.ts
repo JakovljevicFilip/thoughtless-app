@@ -65,7 +65,7 @@ export class ThoughtDexie implements ThoughtRepository {
       ThoughtStatus.DISCARDED.toString()
     )) as ThoughtDexieORM[]
 
-    rows.sort((a, b) => new Date(a.discarded_at!).getTime() - new Date(b.discarded_at!).getTime())
+    rows.sort((a, b) => new Date(b.discarded_at!).getTime() - new Date(a.discarded_at!).getTime())
 
     const aggregate = new ThoughtAggregate()
 
