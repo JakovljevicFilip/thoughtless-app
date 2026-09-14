@@ -16,8 +16,8 @@ export const syncActiveQuotaNotice = (numberOfActiveThoughts: number): void => {
     domainName,
     new Notice(
       scenario,
-      'Thought quota full',
-      'You have reached the maximum number of active thoughts.',
+      'You have too many thoughts',
+      'Free up some space to save more.',
       Style.warning
     )
   )
