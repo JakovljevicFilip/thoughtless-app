@@ -72,7 +72,7 @@
       <button-component
         label="Discard"
         icon="remove_circle_outline"
-        @click="handleDiscard(thought)"
+        @click="thoughtService.discard(thought)"
         :border="false"
         case="primary"
       />
@@ -89,15 +89,11 @@
 
   import { useThoughtExpiry } from '../Composables/useThoughtExpiry'
   import { useCopy } from '../../Composables/useCopy'
-  import { useDiscard } from '../Composables/useDiscard'
-  import { useDiscardWhenDiscardedIsFull } from '../Composables/useDiscardWhenDiscardedIsFull'
 
-  import { useThoughtStore } from 'src/application/Microservice/Thought/Application/thought-store'
-  import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
+  import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
   import { ThoughtExpiryStatus } from 'src/application/Microservice/Thought/Domain/ValueObject/ThoughtExpiryStatus'
 
-  import { storeToRefs } from 'pinia'
   import { computed } from 'vue'
 
   const { thought } = defineProps<{ thought: ActiveThought }>()
@@ -114,17 +110,6 @@
         return 'var(--q-secondary)'
     }
   })
-
-  const store = useThoughtStore()
-  const { discarded } = storeToRefs(store)
-
-  const handleDiscard = async (thought: ActiveThought) => {
-    if (discarded.value.length >= ThoughtSettings.maxDiscarded) {
-      await useDiscardWhenDiscardedIsFull(thought)
-      return
-    }
-    await useDiscard(thought)
-  }
 </script>
 
 <style>
