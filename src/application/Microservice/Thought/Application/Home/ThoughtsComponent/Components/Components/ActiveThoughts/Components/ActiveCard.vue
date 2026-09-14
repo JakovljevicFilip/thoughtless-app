@@ -30,28 +30,8 @@
 
       <q-space />
 
-      <div
-        class="text-caption"
-        :class="
-          thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
-            ? 'text-primary'
-            : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
-              ? 'text-warning'
-              : 'text-secondary'
-        "
-      >
-        <q-icon
-          name="schedule"
-          size="14px"
-          class="q-mr-xs"
-          :color="
-            thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
-              ? 'primary'
-              : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
-                ? 'warning'
-                : 'secondary'
-          "
-        />
+      <div class="text-caption" :class="`text-${expiryColor}`">
+        <q-icon name="schedule" size="14px" class="q-mr-xs" :color="expiryColor" />
         {{ getTimeRemainingFromExpiresAt(thought.expiresAt) }}
       </div>
     </q-card-section>
@@ -81,7 +61,8 @@
 </template>
 
 <script setup lang="ts">
-  import { getTimeRemainingFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
+  import { getTimeRemainingFromExpiresAt } from './thoughtExpiry-helper'
+  import { getExpiryColor } from './expiryColor-helper'
 
   import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
@@ -100,16 +81,8 @@
   defineEmits<{ (e: 'alter'): void }>()
   useThoughtExpiry()
 
-  const borderColor = computed(() => {
-    switch (thought.expiryStatus) {
-      case ThoughtExpiryStatus.EXPIRED:
-        return 'var(--q-warning)'
-      case ThoughtExpiryStatus.ABOUT_TO_EXPIRE:
-        return 'var(--q-primary)'
-      default:
-        return 'var(--q-secondary)'
-    }
-  })
+  const expiryColor = computed(() => getExpiryColor(thought.expiryStatus))
+  const borderColor = computed(() => `var(--q-${expiryColor.value})`)
 </script>
 
 <style>
