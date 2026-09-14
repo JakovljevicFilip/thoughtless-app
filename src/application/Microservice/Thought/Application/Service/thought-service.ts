@@ -4,6 +4,8 @@ import { syncActiveQuotaNotice } from './quotaNotice-helper'
 import { useThoughtStore } from '../thought-store'
 import { ThoughtApplicationError } from '../ThoughtApplicationError'
 
+import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
+
 import { thoughtAlterHandler } from './CQRS/Command/Alter/alter-handler'
 import { thoughtDiscardHandler } from './CQRS/Command/Discard/discard-handler'
 import { thoughtRecordHandler } from './CQRS/Command/Record/record-handler'
@@ -34,10 +36,19 @@ export const thoughtService = {
 
   async discard(thought: Thought): Promise<void> {
     const store = useThoughtStore()
-    await thoughtDiscardHandler.discard(thought, store.discarded.length)
 
-    await this.listActive()
-    await this.listDiscarded()
+    try {
+      if (store.discarded.length >= ThoughtSettings.maxDiscarded) {
+        await this.discardWhenDiscardedIsFull(thought)
+      } else {
+        await thoughtDiscardHandler.discard(thought, store.discarded.length)
+        await this.listActive()
+        await this.listDiscarded()
+      }
+      notifyPublisher.success('Thought discarded.')
+    } catch {
+      notifyPublisher.warning('Thought could not be discarded.')
+    }
   },
 
   async discardWhenDiscardedIsFull(thought: Thought): Promise<void> {

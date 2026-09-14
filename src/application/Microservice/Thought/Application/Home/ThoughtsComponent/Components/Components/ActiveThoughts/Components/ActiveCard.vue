@@ -30,28 +30,8 @@
 
       <q-space />
 
-      <div
-        class="text-caption"
-        :class="
-          thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
-            ? 'text-primary'
-            : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
-              ? 'text-warning'
-              : 'text-secondary'
-        "
-      >
-        <q-icon
-          name="schedule"
-          size="14px"
-          class="q-mr-xs"
-          :color="
-            thought.expiryStatus === ThoughtExpiryStatus.ABOUT_TO_EXPIRE
-              ? 'primary'
-              : thought.expiryStatus === ThoughtExpiryStatus.EXPIRED
-                ? 'warning'
-                : 'secondary'
-          "
-        />
+      <div class="text-caption" :class="`text-${expiryColor}`">
+        <q-icon name="schedule" size="14px" class="q-mr-xs" :color="expiryColor" />
         {{ getTimeRemainingFromExpiresAt(thought.expiresAt) }}
       </div>
     </q-card-section>
@@ -72,7 +52,7 @@
       <button-component
         label="Discard"
         icon="remove_circle_outline"
-        @click="handleDiscard(thought)"
+        @click="thoughtService.discard(thought)"
         :border="false"
         case="primary"
       />
@@ -81,7 +61,8 @@
 </template>
 
 <script setup lang="ts">
-  import { getTimeRemainingFromExpiresAt } from 'src/application/Microservice/Thought/Application/Helper/thoughtExpiry-helper'
+  import { getTimeRemainingFromExpiresAt } from './thoughtExpiry-helper'
+  import { getExpiryColor } from './expiryColor-helper'
 
   import ButtonComponent from 'src/application/Shared/Application/ButtonComponent.vue'
 
@@ -89,42 +70,19 @@
 
   import { useThoughtExpiry } from '../Composables/useThoughtExpiry'
   import { useCopy } from '../../Composables/useCopy'
-  import { useDiscard } from '../Composables/useDiscard'
-  import { useDiscardWhenDiscardedIsFull } from '../Composables/useDiscardWhenDiscardedIsFull'
 
-  import { useThoughtStore } from 'src/application/Microservice/Thought/Application/thought-store'
-  import { ThoughtSettings } from 'src/application/Microservice/Thought/Domain/ThoughtSettings'
+  import { thoughtService } from 'src/application/Microservice/Thought/Application/Service/thought-service'
 
   import { ThoughtExpiryStatus } from 'src/application/Microservice/Thought/Domain/ValueObject/ThoughtExpiryStatus'
 
-  import { storeToRefs } from 'pinia'
   import { computed } from 'vue'
 
   const { thought } = defineProps<{ thought: ActiveThought }>()
   defineEmits<{ (e: 'alter'): void }>()
   useThoughtExpiry()
 
-  const borderColor = computed(() => {
-    switch (thought.expiryStatus) {
-      case ThoughtExpiryStatus.EXPIRED:
-        return 'var(--q-warning)'
-      case ThoughtExpiryStatus.ABOUT_TO_EXPIRE:
-        return 'var(--q-primary)'
-      default:
-        return 'var(--q-secondary)'
-    }
-  })
-
-  const store = useThoughtStore()
-  const { discarded } = storeToRefs(store)
-
-  const handleDiscard = async (thought: ActiveThought) => {
-    if (discarded.value.length >= ThoughtSettings.maxDiscarded) {
-      await useDiscardWhenDiscardedIsFull(thought)
-      return
-    }
-    await useDiscard(thought)
-  }
+  const expiryColor = computed(() => getExpiryColor(thought.expiryStatus))
+  const borderColor = computed(() => `var(--q-${expiryColor.value})`)
 </script>
 
 <style>
