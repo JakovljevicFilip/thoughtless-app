@@ -3,6 +3,7 @@ import { syncActiveQuotaNotice } from './quotaNotice-helper'
 
 import { useThoughtStore } from '../thought-store'
 import { ThoughtApplicationError } from '../ThoughtApplicationError'
+import { thoughtPublisher } from '../Event/thought-publishers'
 
 import { notifyPublisher } from 'src/application/Platform/Notification/InApp/Application/Event/notify-publishers'
 
@@ -45,6 +46,7 @@ export const thoughtService = {
         await this.listActive()
         await this.listDiscarded()
       }
+      this.publishDiscarded(thought)
       notifyPublisher.success('Thought discarded.')
     } catch {
       notifyPublisher.warning('Thought could not be discarded.')
@@ -72,6 +74,14 @@ export const thoughtService = {
 
     await this.listActive()
     await this.listDiscarded()
+  },
+
+  publishDiscarded(thought: Thought): void {
+    const store = useThoughtStore()
+    const discardedThought = store.discarded.find(candidate => candidate.id.equals(thought.id))
+    if (discardedThought?.discarded_at) {
+      thoughtPublisher.discarded(discardedThought.id.toString(), discardedThought.discarded_at)
+    }
   },
 
   async restore(thought: Thought): Promise<void> {

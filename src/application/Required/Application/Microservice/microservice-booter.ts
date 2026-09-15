@@ -9,10 +9,12 @@
 
 import type { Booter } from 'src/application/Platform/Boot/Booter/Domain/Booter'
 
+import { streakSubscriber } from 'src/application/Microservice/Streak/Application/Event/streak-subscribers'
+
 export const microserviceBooter: Booter = {
   BOOTER_NAME: 'microservice',
 
   async execute() {
-    // Future: import and run microservice boot processes here
+    await streakSubscriber.boot()
   },
 }
