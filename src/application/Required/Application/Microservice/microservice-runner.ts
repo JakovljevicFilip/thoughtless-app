@@ -9,12 +9,13 @@
 import type { Runner } from 'src/application/Platform/Boot/Runner/Domain/Runner'
 
 import { removeExpired } from 'src/application/Microservice/Thought/Application/Runner/removeExpired-run'
+import { createStreakEntity } from 'src/application/Microservice/Streak/Application/Runner/createStreakEntity-runner'
 
 export const microserviceRunner: Runner = {
   RUNNER_NAME: 'microservice',
 
   async execute() {
     await removeExpired.run()
-    // Future: import and run microservice boot runners here
+    await createStreakEntity.run()
   },
 }

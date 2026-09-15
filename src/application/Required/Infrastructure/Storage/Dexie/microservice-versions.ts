@@ -7,5 +7,10 @@ export async function applyMicroserviceVersions(): Promise<void> {
     thought: 'id, content, created_at, discarded_at, status',
   })
 
+  microserviceDb.version(2).stores({
+    thought: 'id, content, created_at, discarded_at, status',
+    streak: 'id, current_streak, date_of_count, count_for_date, last_qualified_date',
+  })
+
   await microserviceDb.open()
 }

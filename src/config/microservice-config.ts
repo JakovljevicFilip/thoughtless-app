@@ -15,6 +15,7 @@ const MicroserviceConfig = Object.freeze({
   warningIntervalDays: Number(import.meta.env.VITE_MICROSERVICE_WARNING_INTERVAL_DAYS ?? 7),
   maxActive: Number(import.meta.env.VITE_MICROSERVICE_THOUGHT_MAX_ACTIVE ?? 15),
   maxDiscarded: Number(import.meta.env.VITE_MICROSERVICE_MAX_DISCARDED ?? 5),
+  streakDailyGoal: Number(import.meta.env.VITE_MICROSERVICE_STREAK_DAILY_GOAL ?? 3),
 })
 
 export default MicroserviceConfig
